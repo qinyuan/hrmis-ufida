@@ -118,11 +118,17 @@
             <name>JBoss Public Repository Group</name>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>itari</id>
+            <name>itari repository</name>
+            <url>http://dev.itari.com.cn/nexus/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
