@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="de-admin" namespace="/de-admin" extends="default">
+		<action name="post" class="qinyuan.hrmis.action.de.admin.PostAction" />
+		<action name="get-demand-mdf-table" class="qinyuan.hrmis.action.de.admin.GetDemandMdfTableAction" />
+		<action name="demand" class="qinyuan.hrmis.action.de.admin.DemandAction" />
+		<action name="customer-remark" class="qinyuan.hrmis.action.de.admin.CustomerRemarkAction" />
+		<action name="demand-remark" class="qinyuan.hrmis.action.de.admin.DemandRemarkAction" />
+		<action name="*" class="qinyuan.hrmis.action.de.admin.{1}Action" />
+	</package>
+</struts>

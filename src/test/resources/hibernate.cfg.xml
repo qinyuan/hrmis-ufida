@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="show_sql">true</property>
+
+		<property name="connection.url">jdbc:mysql://localhost:3306/hrmis</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">qinyuan</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">false</property>
+		<property name="current_session_context_class">thread</property>
+
+		<mapping resource="qinyuan/hrmis/dao/TargetPlace.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Post.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Customer.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Demand.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/SimpleDemand.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/SimpleUser.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Resume.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/SimpleSource.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Gender.hbm.xml"/>
+		<mapping resource="qinyuan/hrmis/dao/Source.hbm.xml"/>
+
+	</session-factory>
+
+</hibernate-configuration>
