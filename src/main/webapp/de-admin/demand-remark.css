@@ -1,0 +1,36 @@
+table{
+	font-size: 11pt;
+}
+
+div#editorDiv{
+	position: fixed;
+	top: 50px;
+	width: 980px;
+	display: none;
+}
+
+div.remarkContent{
+	margin: 10px;
+	border: 3px solid lightgray;
+	padding: 5px;
+	border-radius: 10px;
+	background-color: gainsboro;
+}
+
+div#demandDetail{
+	margin: 0;
+}
+
+div#demandDetail td#duty,div#demandDetail td#qualification {
+	width: 20em;
+	height: 8em;
+	vertical-align: top;
+}
+
+div.remark{
+	margin: 0;
+	padding: 10px;
+	border: 2px dotted darkgray;
+	border-radius: 10px;
+	font-size: 11pt;
+}

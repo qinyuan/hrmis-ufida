@@ -1,0 +1,18 @@
+#optionDiv div{
+	padding: 10px;	
+}
+
+#buttonDiv{
+	width: 230px;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: lightyellow;
+	border: 1px solid darkgray;
+	border-radius: 40px;
+}
+
+#columnsSelectDiv{
+	margin-top: 10px;
+	background-color: lightyellow;
+	border: 1px solid darkgray;
+}

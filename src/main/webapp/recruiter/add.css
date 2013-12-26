@@ -1,0 +1,18 @@
+td.split{
+	width: 100px;
+}
+
+td span{
+	color:red;
+}
+
+#addButtonDiv{
+	position: fixed;
+	left: 0;
+	top: 350px;
+	cursor: pointer;
+}
+
+#parseResumeButton{
+	cursor: pointer;
+}

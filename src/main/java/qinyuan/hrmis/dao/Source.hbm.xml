@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="qinyuan.hrmis.dao">
+	<class name="Source" table="rec_source">
+		<id name="id" column="source_id">
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string" />
+		<property name="idPattern" column="id_pattern" lazy="false" />
+		<property name="deletable" type="boolean" />
+		<property name="hrefPrefix" column="href_prefix" type="string" />
+		<property name="hrefSuffix" column="href_suffix" type="string" />
+		<property name="sign" type="string" />
+		<property name="downloaded" type="boolean" />
+	</class>
+</hibernate-mapping>

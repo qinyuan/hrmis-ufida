@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="qinyuan.hrmis.dao">
+	<class name="SimpleDemand" table="rec_demand">
+		<id name="id" column="demand_id">
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string" />
+		<many-to-one name="post" column="post_id" lazy="false" />
+		<many-to-one name="customer" column="customer_id" lazy="false" />
+		<many-to-one name="targetPlace" column="target_place_id" lazy="false" />
+		<property name="active" type="boolean" />
+	</class>
+</hibernate-mapping>

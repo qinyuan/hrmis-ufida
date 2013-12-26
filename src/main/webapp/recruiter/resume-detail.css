@@ -1,0 +1,19 @@
+td.title{
+	width: 100px;
+	background-color:lightgray;
+}
+
+td.content{
+	width:350px;
+}
+
+td{
+	padding: 8px;
+}
+
+#exportButtonDiv{
+	position: fixed;
+	left: 0;
+	top: 350px;
+	cursor: pointer;
+}

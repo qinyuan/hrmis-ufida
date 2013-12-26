@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="recruiter" namespace="/recruiter" extends="default">
+		<action name="add-resume" class="qinyuan.hrmis.action.recruiter.AddResumeAction" />
+		<action name="statistics" class="qinyuan.hrmis.action.recruiter.StatisticsAction" />
+		<action name="line-chart" class="qinyuan.hrmis.action.recruiter.LineChartAction" />
+		<action name="resume-source" class="qinyuan.hrmis.action.recruiter.ResumeSourceAction" />
+		<action name="resume-mdf-table" class="qinyuan.hrmis.action.recruiter.ResumeMdfTableAction" />
+		<action name="available-cus-of-resume" class="qinyuan.hrmis.action.recruiter.AvailableCusOfResumeAction" />
+		<action name="my-resume" class="qinyuan.hrmis.action.recruiter.MyResumeAction" />
+		<action name="mdf-feedback" class="qinyuan.hrmis.action.recruiter.MdfFeedbackAction" />
+		<action name="next-step" class="qinyuan.hrmis.action.recruiter.NextStepAction" />
+		<action name="prev-step" class="qinyuan.hrmis.action.recruiter.PrevStepAction" />
+		<action name="recommend" class="qinyuan.hrmis.action.recruiter.RecommendAction" />
+		<action name="recommend-table" class="qinyuan.hrmis.action.recruiter.RecommendTableAction" />
+	</package>
+</struts>

@@ -1,0 +1,114 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="true" version="3.0">
+
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+
+
+	<!-- this is global filter -->
+	<filter>
+		<filter-name>Global</filter-name>
+		<filter-class>qinyuan.hrmis.filter.Global</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Global</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+
+	<!-- servlets about data management -->
+	<servlet>
+		<servlet-name>download</servlet-name>
+		<servlet-class>qinyuan.lib.web.Download</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>download</servlet-name>
+		<url-pattern>/download</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>data-backup</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.Backup</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>data-backup</servlet-name>
+		<url-pattern>/data/backup</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>recover</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.Recover</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>recover</servlet-name>
+		<url-pattern>/data/recover</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- servlets about sess -->
+	<servlet>
+		<servlet-name>sess-update</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.Update</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>sess-update</servlet-name>
+		<url-pattern>/sess/update</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- servlets about recruiter -->
+	<servlet>
+		<servlet-name>export-excel</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportExcel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>export-excel</servlet-name>
+		<url-pattern>/recruiter/export-excel</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- servlet about recruit manager -->
+	<servlet>
+		<servlet-name>export-excel2</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportExcel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>export-excel2</servlet-name>
+		<url-pattern>/rec-manager/export-excel</url-pattern>
+	</servlet-mapping>
+	
+	<!-- servlets about recruiter -->
+	<servlet>
+		<servlet-name>ExportResumeDetail</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportResumeDetail</servlet-name>
+		<url-pattern>/recruiter/ExportResumeDetail</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- servlet about recruit manager -->
+	<servlet>
+		<servlet-name>ExportResumeDetail2</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportResumeDetail2</servlet-name>
+		<url-pattern>/rec-manager/ExportResumeDetail</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>

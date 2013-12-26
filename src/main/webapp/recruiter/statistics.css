@@ -1,0 +1,74 @@
+div#fullDiv {
+	width: 990px;
+	margin: 20px 0;
+}
+
+div#fullDiv div {
+	maring: 0;
+}
+
+div#fullDiv table {
+	margin: 0;
+	border-collapse: collapse;
+}
+
+div#fullDiv	td {
+	padding: 5px;
+	margin: 0;
+	border: 1px solid darkgray;
+}
+
+div#fullDiv th {
+	margin: 0;
+	padding: 5px;
+	border: 1px solid darkgray;
+}
+
+div#periodDiv {
+	width: 990px;
+	height: 200px;
+	margin: 20px 0;
+}
+
+div#periodDiv input[type=text] {
+	width: 100px;
+}
+
+div#periodTable{
+	padding: 20px;
+}
+
+tr.detailRow {
+	background-color: gainsboro;
+}
+
+tr {
+	heigth: 35px;
+}
+
+tr {
+	height: 40px;
+}
+
+tr {
+	height: 40px;
+}
+
+div#dayDiv {
+	height: 400px;
+}
+
+div#weekDiv {
+	height: 400px;
+}
+
+div#hiddenDiv{
+	position: fixed;
+	top: 100px;
+	left: 200px;
+	display: none;
+}
+
+div#closeHiddenDiv{
+	padding: 20px;
+}

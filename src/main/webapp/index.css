@@ -1,0 +1,72 @@
+body {
+	background: url("lib/img/body-background.jpg") no-repeat scroll center
+		top #353535;
+}
+
+div#inputFormDiv {
+	background-image: url("lib/img/login_form.jpg");
+	background-repeat: no-repeat;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+}
+
+div#usernameDiv {
+	left: 375px;
+	position: absolute;
+	top: 117px;
+}
+
+div#passwordDiv {
+	left: 375px;
+	position: absolute;
+	top: 160px;
+}
+
+input#hrmisUsername,input#hrmisPassword,input#identCode {
+	background-color: transparent;
+	width: 165px;
+}
+
+div#submitDiv {
+	position: relative;
+	left: 240px;
+	top: 225px;
+	z-index: 5;
+}
+
+div#submitDiv img {
+	cursor: pointer;
+}
+
+div#identCodeTextDiv {
+	left: 265px;
+	position: absolute;
+	top: 190px;
+}
+
+div#identImageDiv {
+	left: 320px;
+	position: absolute;
+	top: 240px;
+}
+
+div#identInputBackDiv {
+	left: 360px;
+	position: absolute;
+	top: 200px;
+}
+
+div#identInputDiv {
+	left: 375px;
+	position: absolute;
+	top: 202px;
+}
+
+div#recordDiv {
+	color: #FFFFFF;
+	left: 620px;
+	position: absolute;
+	top: 168px;
+}

@@ -1,0 +1,35 @@
+#tableDiv {
+	width: 750px;
+}
+
+#mdfDiv {
+	position: absolute;
+	top: 400px;
+	left: 770px;
+	display: none;
+}
+
+#addDiv {
+	position: absolute;
+	top: 100px;
+	left: 750px;
+}
+
+#addDiv div {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#mdfPanel {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#debugDiv{
+	margin: 20px;
+}
+
+#debugDiv > div{
+	margin: 20px 0;	
+	display: none;
+}

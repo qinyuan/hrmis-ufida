@@ -1,0 +1,29 @@
+#addDiv,#moveDiv,#mdfDiv {
+	position: absolute;
+	top: 30px;
+	left: 100px;
+	display: none;
+	padding: 20px;
+	border-radius: 20px;
+}
+
+#userTreeDiv {
+	width: 350px;
+	margin-top: 15px;
+}
+
+div#priDiv {
+	position: fixed;
+	left: 600px;
+	top: 153px;
+	width: 350px;
+	display: none;
+}
+
+div#priContent {
+	margin: 0 20px 20px 20px;
+}
+
+div#result{
+	padding: 0 0 20px 20px;
+}

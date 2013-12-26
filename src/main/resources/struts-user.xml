@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="user" namespace="/user" extends="default">
+		<action name="list" class="qinyuan.hrmis.action.user.ListAction" />
+		<action name="pri-panel" class="qinyuan.hrmis.action.user.PriPanelAction" />
+		<action name="mdf-pri" class="qinyuan.hrmis.action.user.MdfPriAction" />
+		<action name="resume-source" class="qinyuan.hrmis.action.user.ResumeSourceAction" />
+		<action name="resume-source-map" class="qinyuan.hrmis.action.user.ResumeSourceMapAction" />
+		<action name="*" class="qinyuan.hrmis.action.user.{1}Action" />
+	</package>
+</struts>

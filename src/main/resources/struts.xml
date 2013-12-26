@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="default" extends="struts-default">
+		<global-results>
+			<result name="login">/index.jsp</result>
+			<result name="success">/${jsp}</result>
+			<result name="ajax-info">/ajax-info.jsp</result>
+			<result name="blank-ajax-info">/blank-ajax-info.jsp</result>
+		</global-results>
+	</package>
+
+	<package name="login" extends="default">
+		<action name="login" class="qinyuan.hrmis.action.LoginAction" />
+		<action name="logout" class="qinyuan.hrmis.action.LogoutAction" />
+		<action name="mdf-password" class="qinyuan.hrmis.action.MdfPasswordAction" />
+	</package>
+	
+	<include file="struts-recruiter.xml"/>
+	<include file="struts-rec-manager.xml" />
+	<include file="struts-user.xml" />
+	<include file="struts-de-admin.xml" />
+	<include file="struts-demand.xml" />
+</struts>

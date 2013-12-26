@@ -1,0 +1,6 @@
+div#tableDiv{
+	position: absolute;
+	left: 250px;
+	top:0;	
+	width: 600px;
+}

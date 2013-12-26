@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="qinyuan.hrmis.dao">
+	<class name="Resume" table="rec_resume">
+		<id name="id" column="resume_id">
+			<generator class="native"/>
+		</id>
+		<property name="applicant" type="string" />
+		<property name="addTime" column="add_time" type="string" />
+		<many-to-one name="creator" column="creator_id" lazy="false" />
+		<many-to-one name="tracer" column="tracer_id" lazy="false" />
+		<property name="company" type="string" />
+		<many-to-one name="post" column="post_id" lazy="false" />
+		<property name="tel" type="string" />
+		<property name="email" type="string" />
+		<property name="qq" type="string" />
+		<many-to-one name="source" column="source_id" lazy="false" />
+		<property name="resumeNo" column="resume_no" type="string" />
+		<property name="resumeLink" column="resume_link" type="string" />
+		<property name="experience" type="double" />
+		<property name="expectSalary" column="expect_salary" type="string" />
+		<property name="intention" type="string" />
+		<property name="jhReason" column="jh_reason" type="string" />
+		<property name="education" type="string" />
+		<property name="skill" type="string" />
+		<property name="prevJob" column="prev_job" type="string" />
+		<property name="prevProj" column="prev_proj" type="string" />
+		<property name="other" type="string" />
+		<property name="content" type="string" />
+		<property name="intentionRed" column="intention_red" type="boolean" />
+		<many-to-one name="targetPlace" column="target_place_id" lazy="false" />
+		<property name="downloaded" type="boolean" />
+		<property name="mdfTime" column="mdf_time" type="string" />
+		<many-to-one name="gender" column="gender_id" lazy="false" />
+	</class>
+</hibernate-mapping>

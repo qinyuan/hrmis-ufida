@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="qinyuan.hrmis.dao">
+	<class name="Customer" table="rec_customer">
+		<id name="id" column="customer_id">
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string" />
+		<property name="superior" type="integer" />
+	</class>
+</hibernate-mapping>

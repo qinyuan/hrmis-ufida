@@ -1,0 +1,50 @@
+div#toolDiv {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	width: 870px;
+}
+
+div#toolDiv input.wide {
+	width: 100px;
+}
+
+div#toolDiv input.narrow {
+	width: 50px;
+	font-size: 10pt;
+}
+
+div#toolDiv table.result {
+	float: left;
+	margin-right: 40px;
+}
+
+div#toolDiv td.title {
+	text-align: right;
+}
+
+div#toolDiv td {
+	padding: 5px;
+}
+
+div#toolDiv tr {
+	height: 30px;
+}
+
+div#taxTableDiv {
+	float: left;
+	width: 300px;
+}
+
+div#taxTableDiv th {
+	width: 90px;
+}
+
+div#toolBodyDiv {
+	background: url("lib/img/roll-background.jpg") no-repeat scroll 0 0
+		#FFFFFF;
+	height: 330px;
+	padding: 20px;
+	border: 1px solid black;
+}

@@ -1,0 +1,18 @@
+div.naviBox {
+    background-image: url("lib/img/box-background.png");
+    background-size: 190px 350px;
+    background-repeat: no-repeat;
+    height: 300px;
+    margin: 5px;
+    padding: 30px 0 0 30px;
+    width: 155px;
+}
+
+div.naviBox ul,h3 {
+	margin: 0px;
+}
+
+div.naviBox a {
+	color: white;
+	font-weight: bold;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="demand" namespace="/demand" extends="default">
+		<action name="demand" class="qinyuan.hrmis.action.demand.DemandAction" />
+		<action name="customer-remark" class="qinyuan.hrmis.action.de.admin.CustomerRemarkAction" />
+		<action name="demand-remark" class="qinyuan.hrmis.action.de.admin.DemandRemarkAction" />
+	</package>
+</struts>

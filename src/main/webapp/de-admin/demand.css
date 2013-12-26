@@ -1,0 +1,42 @@
+div#centerDiv {
+	font-size: 11pt;
+}
+
+div#inputDiv {
+	position: absolute;
+	left: 200px;
+	top: 30px;
+	border-radius: 20px;
+	padding: 20px;
+	border: 4px solid black;
+	display: none;
+}
+
+div#mdfDiv {
+	margin-top: 20px;
+	display: none;
+}
+
+td#duty,td#qualification {
+	width: 420px;
+	height: 100px;
+	vertical-align: top;
+}
+
+#detailDiv textarea {
+	font-size: 10pt;
+}
+
+#moveCustomerDiv{
+	position: absolute;
+	left: 250px;
+	top: 25px;
+	width: 400px;
+	padding: 15px;
+	border-radius: 10px;
+	display: none;
+}
+
+#moveCustomerButtonsDiv{
+	padding: 10px;	
+}

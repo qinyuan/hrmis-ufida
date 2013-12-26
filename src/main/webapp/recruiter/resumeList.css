@@ -1,0 +1,26 @@
+div#hiddenDiv,div#mdfRecStepDealTimeDiv,div#resumeMdfDiv {
+	position: fixed;
+	left: 200px;
+	top: 0px;
+}
+
+div#resumeMdfDiv,div#availableCusDiv,div#mdfFeedbackDiv {
+	display: none;
+}
+
+div#mdfRecStepDealTimeDiv,div#resumeMdfDiv {
+	padding: 15px;
+	border-radius: 20px;
+	display: none;
+}
+
+textarea {
+	font-size: 9pt;
+}
+
+#addResumeDiv{
+	position: fixed;
+	left: 0;
+	top: 350px;
+	cursor: pointer;
+}

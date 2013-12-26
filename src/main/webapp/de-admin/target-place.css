@@ -1,0 +1,9 @@
+div.add {
+	position: absolute;
+	left: 600px;
+	top:0;
+}
+
+div#postTableDiv{
+	width: 550px;
+}

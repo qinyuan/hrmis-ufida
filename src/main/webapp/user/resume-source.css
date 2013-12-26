@@ -1,0 +1,12 @@
+#tableDiv {
+	width: 850px;
+}
+
+#addDiv,#mdfDiv {
+	position: absolute;
+	top: 0;
+	left: 100px;
+	padding: 20px;
+	border-radius: 10px;
+	display: none;
+}
