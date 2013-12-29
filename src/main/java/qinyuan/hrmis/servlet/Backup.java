@@ -18,6 +18,7 @@ public class Backup extends MyServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			print("数据库操作失败");
+			print("<br />"+e.getMessage());
 		}
 	}
 }
