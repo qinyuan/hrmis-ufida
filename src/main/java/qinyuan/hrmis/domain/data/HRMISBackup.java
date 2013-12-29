@@ -10,36 +10,26 @@ import qinyuan.lib.file.ZipTool;
 public class HRMISBackup {
 
 	private MySQLBackup backup;
-	private String fileName;
 
 	public HRMISBackup() throws Exception {
 		backup = new MySQLBackup("hrmis", new MyDataSource());
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public boolean export(String supFolder) {
+	public String export(String supFolder) throws Exception {
 		clearZipFile(supFolder);
-		if (backup.export(supFolder)) {
-			String folderName = backup.getBackupFolderName();
-			fileName = folderName.substring(0, folderName.length() - 1)
-					+ ".rar";
-			try {
-				ZipTool.zip(folderName, fileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-				fileName = null;
-				return false;
-			} finally {
-				FileUtil.delete(folderName);
-			}
-			return true;
-		} else {
-			fileName = null;
-			return false;
+		backup.export(supFolder);
+		String folderName = backup.getBackupFolderName();
+		String fileName = folderName.substring(0, folderName.length() - 1)
+				+ ".rar";
+		try {
+			ZipTool.zip(folderName, fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			FileUtil.delete(folderName);
 		}
+
+		return fileName;
 	}
 
 	private static void clearZipFile(String folder) {

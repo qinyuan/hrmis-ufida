@@ -1,7 +1,9 @@
 package qinyuan.lib.db;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+
 import qinyuan.lib.date.MyDateTime;
 import qinyuan.lib.file.FileFormat;
 import qinyuan.lib.file.FileUtil;
@@ -37,14 +39,14 @@ public class MySQLBackup {
 	 * @param supFolder
 	 * @throws Exception
 	 */
-	public boolean export(String supFolder) {
+	public void export(String supFolder) throws Exception {
 		// create backup folder
 		backupFolderName = getFolderName(supFolder, database);
 		File folder = new File(backupFolderName);
 		if (!folder.isDirectory()) {
 			if (!folder.mkdirs()) {
 				errorInfo = "无法在" + supFolder + "路径下创建文件夹";
-				return false;
+				throw new IOException(errorInfo);
 			}
 		}
 
@@ -56,11 +58,10 @@ public class MySQLBackup {
 			createDataFile(cnn, tables, backupFolderName);
 
 			errorInfo = null;
-			return true;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			errorInfo = "数据备份失败";
-			return false;
+			throw e;
 		}
 	}
 
