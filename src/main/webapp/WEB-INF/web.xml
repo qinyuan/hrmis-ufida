@@ -89,7 +89,6 @@
 		<url-pattern>/rec-manager/export-excel</url-pattern>
 	</servlet-mapping>
 	
-	<!-- servlets about recruiter -->
 	<servlet>
 		<servlet-name>ExportResumeDetail</servlet-name>
 		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
@@ -100,7 +99,6 @@
 	</servlet-mapping>
 
 
-	<!-- servlet about recruit manager -->
 	<servlet>
 		<servlet-name>ExportResumeDetail2</servlet-name>
 		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
@@ -109,6 +107,24 @@
 		<servlet-name>ExportResumeDetail2</servlet-name>
 		<url-pattern>/rec-manager/ExportResumeDetail</url-pattern>
 	</servlet-mapping>
-
+	
+	
+	<servlet>
+		<servlet-name>ExportResumeDetail3</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportResumeDetail3</servlet-name>
+		<url-pattern>/demand/ExportResumeDetail</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ExportResumeDetail4</servlet-name>
+		<servlet-class>qinyuan.hrmis.servlet.ExportResumeDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportResumeDetail4</servlet-name>
+		<url-pattern>/de-admin/ExportResumeDetail</url-pattern>
+	</servlet-mapping>
 
 </web-app>
