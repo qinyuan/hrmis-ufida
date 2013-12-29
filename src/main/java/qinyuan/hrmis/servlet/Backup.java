@@ -1,7 +1,7 @@
 package qinyuan.hrmis.servlet;
 
+import qinyuan.hrmis.HrmisConfig;
 import qinyuan.hrmis.domain.data.HRMISBackup;
-import qinyuan.lib.file.PFile;
 import qinyuan.lib.web.MyServlet;
 
 public class Backup extends MyServlet {
@@ -12,7 +12,7 @@ public class Backup extends MyServlet {
 	protected void execute() {
 		try {
 			HRMISBackup backup = new HRMISBackup();
-			String folder = PFile.parse("data").get("dataFolder");
+			String folder = HrmisConfig.getDataFolderName();
 			backup.export(folder);
 			redirect("/download?fileURL=" + backup.getFileName());
 		} catch (Exception e) {

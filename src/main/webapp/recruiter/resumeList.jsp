@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我的简历</title>
+<title>简历列表</title>
 <%@include file="/chead.jsp"%>
 <q:css href="/recruiter/resumeList" />
 <q:js src="/lib/showResult" />

@@ -70,3 +70,7 @@ div#recordDiv {
 	position: absolute;
 	top: 168px;
 }
+
+#ident_image {
+	cursor: pointer;
+}

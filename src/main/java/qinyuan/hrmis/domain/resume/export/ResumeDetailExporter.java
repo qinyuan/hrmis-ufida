@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Map;
 
+import qinyuan.hrmis.HrmisConfig;
 import qinyuan.hrmis.dao.Resume;
 import qinyuan.hrmis.dao.ResumeDao;
 import qinyuan.lib.file.FileUtil;
@@ -21,7 +22,7 @@ public class ResumeDetailExporter {
 			throw new RuntimeException("invalid resume");
 		}
 		clearFile();
-		File xmlFile = FileUtil.createTimeMarkFile(ExportFolder
+		File xmlFile = FileUtil.createTimeMarkFile(HrmisConfig
 				.getResumeDetailXml());
 		String xmlFileName = xmlFile.getAbsolutePath();
 
@@ -43,7 +44,7 @@ public class ResumeDetailExporter {
 	}
 
 	private static void clearFile() {
-		File folder = new File(ExportFolder.getDataFolderName());
+		File folder = new File(HrmisConfig.getDataFolderName());
 		File[] files = folder.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File file, String fileName) {
@@ -63,7 +64,7 @@ public class ResumeDetailExporter {
 
 	public static void main(String[] args) throws Exception {
 		File file = exportWord(689);
-		FileUtil.show(file);
+		FileUtil.show(file.getAbsolutePath().replaceAll("\\d+.doc", ""));
 	}
 
 	private static Map<String, String> map = PFile.parse("word");

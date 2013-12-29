@@ -36,5 +36,6 @@ public class WordUtil {
 	}
 
 	public static void main(String[] args) throws Exception {
+		createDocByXml("d:/test.xml", "d:/test.docx");
 	}
 }

@@ -6,48 +6,18 @@ $(document).ready(function() {
 
 	$table.find('img[data-options]').click(function() {
 		var img = this;
-		var jTr = $(this).parent().parent();
 		if (img.src.indexOf('down') > 0) {
-			img.src = img.src.replace('down', 'up');
-			img.title = img.title.replace('展开', '隐藏');
-			img.alt = img.alt.replace('展开', '隐藏');
-			var parameters=createObjectByStr('{'+$(img).attr('data-options') + '}');
-			loadResumeSum(parameters, jTr);
+			loadResumeSum(img);			
 		} else {
-			img.src = img.src.replace('up', 'down');
-			img.title = img.title.replace('隐藏', '展开');
-			img.alt = img.alt.replace('隐藏', '展开');
-			switchDetailRows(jTr, 'none');
+			removeResumeSum(img);			
 		}
 	});
 	setQueryButton($table.find('a[data-options]'));
-
-	function getTableRowByImgId(id) {
-		return $('#' + id).parent().parent();
-	}
-
-	function switchDetailRows(jTr, display) {
-		jTr = jTr.next();
-		while (jTr.attr('class')) {
-			jTr.css('display', display);
-			jTr = jTr.next();
-		}
-	}
-
-	function loadResumeSum(parameters, jTr) {
-		$.post('statistics.action', parameters, function(data) {
-			if (isAjaxData(data)) {
-				data = parseAjaxData(data);
-				var $data=$(data);
-				setQueryButton($data.find('a[data-options]'));
-				$data.insertAfter(jTr);
-			}
-		});
-	}
-
+	
 	$('#startDate').click(WdatePicker);
 	$('#endDate').click(WdatePicker);
 	$('#queryButton').click(function(e) {
+		e.preventDefault();
 		var startDate = $('#startDate').val();
 		var endDate = $('#endDate').val();
 		if (!startDate) {
@@ -59,7 +29,9 @@ $(document).ready(function() {
 		} else {
 			$.post('statistics.action', {
 				'startDate' : startDate,
-				'endDate' : endDate
+				'endDate' : endDate,
+				'recruiterId' : getRecruiterId(),
+				'postId' : getPostId()
 			}, function(data) {
 				if (isAjaxData(data)) {
 					data = parseAjaxData(data);
@@ -76,6 +48,41 @@ $(document).ready(function() {
 	$('#closeHiddenDivButton').click(function(){
 		CURTAIN.hide();
 	});
+
+	function getTableRowByImgId(id) {
+		return $('#' + id).parent().parent();
+	}
+
+	function removeResumeSum(img) {
+		img.src = img.src.replace('up', 'down');
+		img.title = img.title.replace('隐藏', '展开');
+		img.alt = img.alt.replace('隐藏', '展开');
+		var $tr=getTableRowByImg(img).next();
+		while ($tr.attr('class')) {
+			var next=$tr.next();
+			$tr.remove();
+			$tr=next;
+		}
+	}
+
+	function loadResumeSum(img) {
+		img.src = img.src.replace('down', 'up');
+		img.title = img.title.replace('展开', '隐藏');
+		img.alt = img.alt.replace('展开', '隐藏');
+		var parameters=createObjectByStr('{'+$(img).attr('data-options') + '}');
+		$.post('statistics.action', parameters, function(data) {
+			if (isAjaxData(data)) {
+				data = parseAjaxData(data);
+				var $data=$(data);
+				setQueryButton($data.find('a[data-options]'));
+				$data.insertAfter(getTableRowByImg(img));
+			}
+		});
+	}
+	
+	function getTableRowByImg(img){
+		return $(img).parent().parent();
+	}
 });
 
 function setQueryButton($anchor){

@@ -40,10 +40,6 @@ public class FileUtil {
 		return createTimeMarkFile(new File(templateFileName));
 	}
 
-	public static void main(String[] args) throws IOException {
-		createTimeMarkFile("d:/test/test.doc");
-	}
-
 	public static void append(String fileName, String strToAppend)
 			throws IOException {
 		write(fileName, strToAppend, true);
@@ -126,22 +122,24 @@ public class FileUtil {
 		}
 	}
 
-	private static String classesPath;
+	private static String classesPath = initClassesPath();
+
+	private static String initClassesPath() {
+		String str = FileUtil.class.getResource("/").getPath();
+		try {
+			str = URLDecoder.decode(str, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		if (str.indexOf(":") > 0) {
+			str = str.replaceAll("^/", "");
+		}
+		str = str.replace("/test-classes/", "/classes/");
+		return str;
+	}
 
 	public static String getClassesPath() {
-		if (classesPath == null) {
-			String str = FileUtil.class.getResource("/").getPath();
-			try {
-				str = URLDecoder.decode(str, "UTF-8");
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}
-			if (str.indexOf(":") > 0) {
-				str = str.replaceAll("^/", "");
-			}
-			classesPath = str;
-		}
 		return classesPath;
 	}
 
@@ -151,5 +149,8 @@ public class FileUtil {
 			throw new RuntimeException("invalid file name: " + fileName);
 		}
 		return file;
+	}
+
+	public static void main(String[] args) {
 	}
 }

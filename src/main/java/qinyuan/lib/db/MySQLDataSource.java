@@ -6,18 +6,17 @@ public abstract class MySQLDataSource extends DataSource {
 
 	@Override
 	protected String getUser() {
-		return "root";
+		return HibernateUtil.getUsername();
 	}
 
-	protected abstract String getDataBaseName();
-
-	protected String getHost() {
-		return "localhost";
+	@Override
+	protected String getPassword() {
+		return HibernateUtil.getPassword();
 	}
 
 	@Override
 	protected String getUrl() {
-		return "jdbc:mysql://" + getHost() + ":3306/" + getDataBaseName();
+		return HibernateUtil.getUrl();
 	}
 
 	@Override

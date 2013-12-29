@@ -1,15 +1,12 @@
 package qinyuan.hrmis.domain.resume.export;
 
-import static qinyuan.hrmis.domain.resume.export.ExportFolder.getDailyReportFileName;
-import static qinyuan.hrmis.domain.resume.export.ExportFolder.getDataFolderName;
-import static qinyuan.hrmis.domain.resume.export.ExportFolder.getWeeklyReportFileName;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.SQLException;
 
 import org.apache.poi.ss.usermodel.CellStyle;
 
+import qinyuan.hrmis.HrmisConfig;
 import qinyuan.hrmis.dao.Resume;
 import qinyuan.hrmis.dao.ResumeDao;
 import qinyuan.hrmis.dao.SimpleUser;
@@ -41,7 +38,8 @@ public class ResumeExporter {
 
 	public File exportDailyReport() throws Exception {
 		clearFile();
-		File file = FileUtil.createTimeMarkFile(getDailyReportFileName());
+		File file = FileUtil.createTimeMarkFile(HrmisConfig
+				.getDailyReportFileName());
 		ExcelBook wb = new ExcelBook(file);
 
 		ExcelSheet sh = wb.getSheet(0);
@@ -54,7 +52,8 @@ public class ResumeExporter {
 
 	public File exportWeeklyReport() throws Exception {
 		clearFile();
-		File file = FileUtil.createTimeMarkFile(getWeeklyReportFileName());
+		File file = FileUtil.createTimeMarkFile(HrmisConfig
+				.getWeeklyReportFileName());
 		ExcelBook wb = new ExcelBook(file);
 
 		ExcelSheet sh = wb.getSheet(0);
@@ -178,15 +177,8 @@ public class ResumeExporter {
 		ru.add(r.getPrevProj());
 	}
 
-	/*
-	 * private static File copyFile(String fileName) throws IOException { File
-	 * oldFile = new File(fileName); File file = new File(getDataFolderName() +
-	 * System.currentTimeMillis() + ".xls"); FileUtils.copyFile(oldFile, file);
-	 * return file; }
-	 */
-
 	private static void clearFile() {
-		File folder = new File(getDataFolderName());
+		File folder = new File(HrmisConfig.getDataFolderName());
 		File[] files = folder.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File file, String fileName) {

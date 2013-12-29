@@ -2,8 +2,8 @@ package qinyuan.hrmis.servlet;
 
 import org.apache.commons.fileupload.FileItem;
 
+import qinyuan.hrmis.HrmisConfig;
 import qinyuan.hrmis.domain.data.HRMISRecover;
-import qinyuan.lib.file.PFile;
 import qinyuan.lib.web.Upload;
 
 public class Recover extends Upload {
@@ -12,7 +12,7 @@ public class Recover extends Upload {
 
 	@Override
 	protected String getDiskFolder() {
-		return PFile.parse("data").get("dataFolder");
+		return HrmisConfig.getDataFolderName();
 	}
 
 	@Override

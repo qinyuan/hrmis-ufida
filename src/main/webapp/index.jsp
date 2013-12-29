@@ -4,12 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>人力资源信息系统</title>
+<title>招聘管理系统</title>
 <%@include file="/chead.jsp"%>
 <q:css href="/index" />
-<q:css href="/inc/ident-code" />
 <q:js src="/index" />
-<q:js src="/inc/ident-code" />
 </head>
 <body>
 	<div class="body">

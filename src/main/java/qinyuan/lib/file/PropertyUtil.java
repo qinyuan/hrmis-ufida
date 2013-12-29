@@ -1,5 +1,6 @@
 package qinyuan.lib.file;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,15 @@ public class PropertyUtil {
 	private static String[] readPFileAsStrArr(String fileName) throws Exception {
 		fileName = adjustFileName(fileName);
 		String fullPath = FileUtil.getClassesPath() + "properties/" + fileName;
+		if (!exists(fullPath)) {
+			fullPath = FileUtil.getClassesPath() + fileName;
+		}
 		return FileUtil.readAsStrArr(fullPath);
+	}
+
+	private static boolean exists(String fileName) {
+		File file = new File(fileName);
+		return file.isFile();
 	}
 
 	private static String adjustFileName(String fileName) {

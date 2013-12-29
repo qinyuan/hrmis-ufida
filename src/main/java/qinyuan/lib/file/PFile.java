@@ -49,6 +49,13 @@ public class PFile {
 		String fullPath = FileUtil.getClassesPath() + fileName;
 		return FileUtil.readAsStrArr(fullPath);
 	}
+	
+	public static void main(String[] args) {
+		String fileName=adjustFileName("aa");
+		String fullPath = FileUtil.getClassesPath() + fileName;
+		System.out.println(fullPath);
+		
+	}
 
 	private static String adjustFileName(String fileName) {
 		if (!fileName.endsWith(EXTEND_NAME)) {

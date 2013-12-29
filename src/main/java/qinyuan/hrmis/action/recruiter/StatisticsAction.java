@@ -26,16 +26,9 @@ public class StatisticsAction extends MyAction {
 	}
 
 	private void getPeriodResumeSum() {
-		Integer recruiterId = (Integer) getSession("recruiterId");
-		if (recruiterId == null)
-			recruiterId = 0;
-
-		Integer postId = (Integer) getSession("postId");
-		if (postId == null)
-			postId = 0;
-
 		String startDate = getString("startDate");
 		String endDate = getString("endDate");
+		System.out.println(recruiterId);
 		if (MyDate.isDate(startDate) && MyDate.isDate(endDate)) {
 			setResult(new PeriodResumeStatistics(startDate, endDate).setUserId(
 					recruiterId).setPostId(postId));

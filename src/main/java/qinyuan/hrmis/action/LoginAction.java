@@ -21,6 +21,7 @@ public class LoginAction extends SimpleAction {
 
 		String remoteAddr = getRequest().getRemoteAddr();
 		if (!lm.validateUserInput()) {
+			setResult("用户名或密码错误");
 			IdentifyCode.addBlackList(remoteAddr);
 		} else {
 			lm.saveUserByInput();

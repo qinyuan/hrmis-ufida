@@ -10,6 +10,11 @@ $(document).ready(function() {
 			login();
 		}
 	});
+
+	$('#ident_image').click(changeIdentImage);
+	function changeIdentImage(){
+		$('#ident_image').get(0).src="/hrmis/inc/ident-image.jsp";
+	}
 	function login() {
 		submitForm("loginForm", null, function(data) {
 			if(isAjaxData(data)){

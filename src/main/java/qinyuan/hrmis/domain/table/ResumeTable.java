@@ -31,9 +31,15 @@ public class ResumeTable extends BasePaginatedTable {
 	private String searchName;
 	private String searchTel;
 	private int targetPlaceId;
+	private boolean editable = true;
 
 	public ResumeTable() {
 		super(new MyDataSource());
+	}
+
+	public ResumeTable setEditable(boolean editable) {
+		this.editable = editable;
+		return this;
 	}
 
 	public ResumeTable setEndAddDate(String endAddDate) {
@@ -112,7 +118,7 @@ public class ResumeTable extends BasePaginatedTable {
 	protected String getQuery() {
 		String recommendSubQuery = "(SELECT *,MAX(recommend_id) "
 				+ "FROM rec_recommend GROUP BY resume_id)";
-		String recStepSubQuery = "(SELECT *,Max(status_id) "
+		String recStepSubQuery = "(SELECT *,Max(status_id) AS max_status_id "
 				+ "FROM rec_rec_step GROUP BY recommend_id)";
 		String s = "SELECT * FROM rec_resume AS r "
 				+ "LEFT JOIN u_user AS u1 ON r.creator_id=u1.user_id "
@@ -125,7 +131,7 @@ public class ResumeTable extends BasePaginatedTable {
 				+ "LEFT JOIN "
 				+ recStepSubQuery
 				+ " AS rs ON rm.recommend_id=rs.recommend_id "
-				+ "LEFT JOIN rec_status AS s ON rs.status_id=s.status_id "
+				+ "LEFT JOIN rec_status AS s ON rs.max_status_id=s.status_id "
 				+ "LEFT JOIN rec_target_place AS tp ON tp.target_place_id=r.target_place_id ";
 		s = s + getWhereClause() + " ORDER BY add_time DESC";
 		return s;
@@ -249,7 +255,7 @@ public class ResumeTable extends BasePaginatedTable {
 		tr.add(SimpleDemandDao.getFullDemandName(cnn.getInt("d.demand_id")));
 		tr.add(Status.get(cnn.getInt("s.status_id")));
 
-		if (getEditable(cnn)) {
+		if (editable && isEditable(cnn)) {
 			int recommendId = cnn.getInt("rm.recommend_id");
 			addEditTableData(tr, resumeId, recommendId);
 		} else {
@@ -257,7 +263,7 @@ public class ResumeTable extends BasePaginatedTable {
 		}
 	}
 
-	private boolean getEditable(MySQLConn cnn) throws SQLException {
+	private boolean isEditable(MySQLConn cnn) throws SQLException {
 		return user != null && (user.hasPri(5) || user.hasPri(6))
 				&& user.hasSubUser(cnn.getInt("r.creator_id"));
 	}
@@ -280,8 +286,5 @@ public class ResumeTable extends BasePaginatedTable {
 	@Override
 	protected String getTitle() {
 		return "简历列表";
-	}
-
-	public static void main(String[] args) {
 	}
 }
