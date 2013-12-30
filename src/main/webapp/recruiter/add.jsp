@@ -22,8 +22,8 @@
 			<form id="addForm" action="add-resume.action" method="post">
 				<q:panel title="简历内容">
 					<textarea id="editor" name="editor"></textarea>
-					<img alt="解析简历内容" src="/hrmis/recruiter/parseResumeButton.png" id="parseResumeButton">
-					&nbsp;&nbsp;&nbsp;&nbsp; （注：在此处粘贴好简历内容之后，单击“解析简历内容”，即可自动填充简历信息）
+					<img alt="手动解析" src="/hrmis/recruiter/parseResumeButton.png" id="parseResumeButton">
+					&nbsp;&nbsp;&nbsp;&nbsp;（注：解析简历是指抓取“简历内容”，自动填充到“简历信息”中）
 				</q:panel>
 				<q:accordion>
 					<q:accPage title="简历信息">

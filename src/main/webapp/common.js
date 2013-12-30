@@ -154,12 +154,12 @@ function addLocationParamAndReload(paramObj) {
 
 	function pushSearch(name, value) {
 		search = search.replace('?', '');
-		console.log(search);
+		var searchArr=null;
 		if (search == '') {
-			var searchArr = new Array();
+			searchArr = new Array();
 			searchArr[0] = name + "=" + value;
 		} else {
-			var searchArr = search.split('&');
+			searchArr = search.split('&');
 			for (var i = 0; i < searchArr.length; i++) {
 				if (searchArr[i].split('=')[0] == name) {
 					searchArr[i] = name + "=" + value;
@@ -268,7 +268,7 @@ function filterInt(str) {
 }
 function persistStatus(id) {
 	var paramName = location.href + '_' + id;
-	var paramName = paramName.replace(/\W/g, '_');
+	paramName = paramName.replace(/\W/g, '_');
 	var $obj = $('#' + id);
 	if (isCheckBox()) {
 		$obj.click(function() {
