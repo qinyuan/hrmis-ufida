@@ -38,7 +38,15 @@ public class SimpleUserDao {
 		return HConn.getOneArray("FROM SimpleUser", SimpleUser.class);
 	}
 
-	public static void add(String username, String password) throws Exception {
+	public static void add(String username, String password, int superiorId) {
+		SimpleUser su = new SimpleUser();
+		su.setName(username);
+		su.setPassword(password);
+		su.setSuperior(superiorId);
+		HConn.saveOne(su);
+	}
+
+	public static void add(String username, String password) {
 		SimpleUser su = new SimpleUser();
 		su.setName(username);
 		su.setPassword(password);

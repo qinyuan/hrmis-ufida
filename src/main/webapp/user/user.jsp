@@ -39,6 +39,7 @@
 
 			<div id="addDiv">
 				<form id="addForm" action="User.action" method="post">
+					<q:hidden id="superiorId" value="-1" />
 					用户名：<br />
 					<q:text id="username" required="true" />
 					<br /> <br /> 密码：<br />

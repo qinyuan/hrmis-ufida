@@ -58,10 +58,14 @@ public class UserAction extends SimpleAction {
 		}
 
 		if (SimpleUserDao.exists(username)) {
-			setResult("该用记已经存在");
+			setResult("该用户已经存在");
 		} else {
-			SimpleUserDao.add(username, password);
-			setResult("用户添加成功");
+			int superiorId = getInt("superiorId");
+			if (superiorId > 0) {
+				SimpleUserDao.add(username, password, superiorId);
+			} else {
+				SimpleUserDao.add(username, password);
+			}
 		}
 	}
 }

@@ -1,52 +1,68 @@
+var userTree, moveTree;
+var getUserId = function() {
+	return filterInt(userTree.lastCheckedId);
+};
+var hidePrivilege = function() {
+	$('#priDiv').hide();
+};
 $(document).ready(function() {
-	var userTree=new Tree("userTreeDiv");
-	var moveTree=new Tree("moveDiv");
-	userTree.onclick(function(){
+	userTree = new Tree("userTreeDiv");
+	moveTree = new Tree("moveDiv");
+	userTree.onclick(function() {
 		$('#moveButton').linkbutton('enable');
-		showPrivilege(getSubUserId());
+		var userId = getUserId();
+		if (userId) {
+			showPrivilege(getUserId());
+		} else {
+			hidePrivilege();
+		}
 	});
 	$('#addSubmit').click(function() {
 		submitForm("addForm");
 	});
 	$('a[id$="Cancel"]').click(CURTAIN.hide);
-	$('#addButton').click(function(){
+	$('#addButton').click(function() {
 		CURTAIN.show('addDiv');
+		var userId = getUserId();
+		if (userId) {
+			$('#superiorId').val(userId);
+		}
 	});
-	$('#moveButton').click(function(){
-		var checkedId=userTree.lastCheckedId;
-		if(checkedId==null){
+	$('#moveButton').click(function() {
+		var checkedId = userTree.lastCheckedId;
+		if (checkedId == null) {
 			return;
 		}
-		var userId=filterInt(checkedId);
+		var userId = filterInt(checkedId);
 		$('#moveDiv *').show();
-		$('#supUser'+userId).hide();
+		$('#supUser' + userId).hide();
 		CURTAIN.show('moveDiv');
 	});
-	$('#moveOk').click(function(){
-		var subUserId=getSubUserId();
-		var supUserId=filterInt(moveTree.lastCheckedId);
-		if(supUserId==null){
-			supUserId=0;
+	$('#moveOk').click(function() {
+		var subUserId = getUserId();
+		var supUserId = filterInt(moveTree.lastCheckedId);
+		if (supUserId == null) {
+			supUserId = 0;
 		}
-		$.post('User.action',{
-			subUserId:subUserId,
-			supUserId:supUserId
-		},ajaxCallBack);
+		$.post('User.action', {
+			subUserId : subUserId,
+			supUserId : supUserId
+		}, ajaxCallBack);
 	});
 	$('#moveCancel').click(CURTAIN.hide);
-	$('#mdfButton').click(function(e){
+	$('#mdfButton').click(function(e) {
 		e.preventDefault();
-		var userId=getSubUserId();
-		if(userId==null){
+		var userId = getUserId();
+		if (userId == null) {
 			return;
 		}
 		$('#mdfId').val(userId);
 		CURTAIN.show('mdfDiv');
 	});
-	$('#delButton').click(function(e){
+	$('#delButton').click(function(e) {
 		e.preventDefault();
-		var userId=getSubUserId();
-		if(userId==null){
+		var userId = getUserId();
+		if (userId == null) {
 			return;
 		}
 		if (!confirm("确定删除？"))
@@ -57,12 +73,10 @@ $(document).ready(function() {
 	});
 	$('#mdfOK').click(function() {
 		submitForm("mdfForm");
-	});	
-	function getSubUserId(){
-		return filterInt(userTree.lastCheckedId);
-	}
+	});
+
 });
-function showPrivilege(userId){
+function showPrivilege(userId) {
 	$('#priDiv').show();
 	$.post("pri-panel.action", {
 		"userId" : userId
@@ -71,13 +85,13 @@ function showPrivilege(userId){
 		if (!isAjaxData(data))
 			return;
 		data = parseAjaxData(data);
-		
-		$('div#priContent').empty().append(data)
-			.find('input:checkbox').each(function() {
-			if (!this.checked) {
-				$(this).parent().css('color', 'gray');
-			}
-		}).click(function() {
+
+		$('div#priContent').empty().append(data).find('input:checkbox').each(
+				function() {
+					if (!this.checked) {
+						$(this).parent().css('color', 'gray');
+					}
+				}).click(function() {
 			var priId = this.id.substring(3);
 			$.post("mdf-pri.action", {
 				'userId' : userId,
@@ -96,8 +110,8 @@ function showPrivilege(userId){
 				$(this).parent().css('color', 'gray');
 			}
 		});
-		var $h4=$('#priContent').find('h4');
-		var title=$h4.text();
+		var $h4 = $('#priContent').find('h4');
+		var title = $h4.text();
 		$h4.remove();
 		$('#priDiv > h4').text(title);
 	}

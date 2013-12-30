@@ -48,12 +48,11 @@ $(function() {
 		e.preventDefault();
 	});
 	$('#debugResultButton').click(function(e){
-		var content=CKEDITOR.instances.ckeditor.getData();
 		var selector=$('#debugSelector').val();
 		if($.trim(selector)!=''){
-			var value;
+			var value=null;
 			try{
-				eval('value=$("<div>"+content+"</div>")'+selector+';');
+				eval('value=$("<div>"+getEditorContent()+"</div>")'+selector+';');
 			}catch(err){
 				alert(err);
 			}
@@ -66,4 +65,7 @@ $(function() {
 	CKEDITOR.replace('ckeditor',{
 		height:300,
 	});
+	function getEditorContent(){
+		return CKEDITOR.instances.ckeditor.getData();
+	}
 });
