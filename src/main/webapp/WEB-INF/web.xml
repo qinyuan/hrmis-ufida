@@ -7,8 +7,6 @@
 		<session-timeout>-1</session-timeout>
 	</session-config>
 
-
-	<!-- this is global filter -->
 	<filter>
 		<filter-name>Global</filter-name>
 		<filter-class>qinyuan.hrmis.filter.Global</filter-class>
@@ -28,7 +26,6 @@
 	</filter-mapping>
 
 
-	<!-- servlets about data management -->
 	<servlet>
 		<servlet-name>download</servlet-name>
 		<servlet-class>qinyuan.lib.web.Download</servlet-class>
@@ -57,7 +54,6 @@
 	</servlet-mapping>
 
 
-	<!-- servlets about sess -->
 	<servlet>
 		<servlet-name>sess-update</servlet-name>
 		<servlet-class>qinyuan.hrmis.servlet.Update</servlet-class>
@@ -68,7 +64,6 @@
 	</servlet-mapping>
 
 
-	<!-- servlets about recruiter -->
 	<servlet>
 		<servlet-name>export-excel</servlet-name>
 		<servlet-class>qinyuan.hrmis.servlet.ExportExcel</servlet-class>
@@ -79,7 +74,6 @@
 	</servlet-mapping>
 
 
-	<!-- servlet about recruit manager -->
 	<servlet>
 		<servlet-name>export-excel2</servlet-name>
 		<servlet-class>qinyuan.hrmis.servlet.ExportExcel</servlet-class>
