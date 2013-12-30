@@ -1,5 +1,6 @@
 package qinyuan.hrmis.servlet;
 
+import qinyuan.lib.date.MyDate;
 import qinyuan.lib.date.Week;
 import qinyuan.lib.web.MyServlet;
 
@@ -30,6 +31,7 @@ public class Update extends MyServlet {
 		updateStringSess("sessSearchTel");
 
 		locateThisWeek();
+		locateToday();
 
 		ajax();
 	}
@@ -49,6 +51,23 @@ public class Update extends MyServlet {
 			} else if (thisWeekType.equals("thisWeekHandleDate")) {
 				updateStringSess("startHandleDate", weekStartDate);
 				updateStringSess("endHandleDate", weekEndDate);
+			}
+		}
+	}
+
+	private void locateToday() {
+		String todayType = getParameter("today");
+		if (todayType != null) {
+			String today = new MyDate().toString();
+			if (todayType.equals("todayAddDate")) {
+				updateStringSess("resumeStartAddDate", today);
+				updateStringSess("resumeEndAddDate", today);
+			} else if (todayType.equals("todayMdfDate")) {
+				updateStringSess("resumeStartMdfDate", today);
+				updateStringSess("resumeEndMdfDate", today);
+			} else if (todayType.equals("todayHandleDate")) {
+				updateStringSess("startHandleDate", today);
+				updateStringSess("endHandleDate", today);
 			}
 		}
 	}

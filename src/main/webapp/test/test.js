@@ -1,9 +1,8 @@
-CKEDITOR.replace('editor', {
-	height : 300,
-	width : 900,
-	on : {
-		instanceReady : function() {
-			console.log(this.name);
-		}
-	}
-});
+var test=function(){
+	console.log("test1");
+};
+test();
+var test=function test(){
+	console.log("test2");
+};
+test();

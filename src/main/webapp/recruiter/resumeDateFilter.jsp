@@ -20,6 +20,7 @@
 -
 <input type="text" id="resumeEndAddDate" value="<%=endAddDate%>"
 	readonly="readonly" />
+<a id="todayAddDate" href="#">今天</a>
 <a id="thisWeekAddDate" href="#">本周</a>
 
 &nbsp;&nbsp;&nbsp;&nbsp; 修改日期：
@@ -28,6 +29,7 @@
 -
 <input type="text" id="resumeEndMdfDate" value="<%=endMdfDate%>"
 	readonly="readonly" />
+<a id="todayMdfDate" href="#">今天</a>
 <a id="thisWeekMdfDate" href="#">本周</a>
 <%
 	} else {
@@ -40,6 +42,7 @@
 -
 <input type="text" id="endHandleDate" value="<%=endHandleDate%>"
 	readonly="readonly" />
+<a id="todayHandleDate" href="#">今天</a>
 <a id="thisWeekHandleDate" href="#">本周</a>
 <%
 	}
