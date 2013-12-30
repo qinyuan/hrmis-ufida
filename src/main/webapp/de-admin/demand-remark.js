@@ -3,6 +3,7 @@ $(function() {
 	CKEDITOR.replace('editor',{
 		height:300,
 	});
+	decorateTable($('#demandDetail,#recommendList'), false);
 	var demandId=$('#hidDemandId').val();
 	var remarkId=null;
 	var add=true;
