@@ -1,18 +1,31 @@
-td.split{
+td.split {
 	width: 100px;
 }
 
-td span{
-	color:red;
+td span {
+	color: red;
 }
 
-#addButtonDiv{
+#addButtonDiv {
 	position: fixed;
 	left: 0;
 	top: 350px;
 	cursor: pointer;
 }
 
-#parseResumeButton{
+#parseResumeButton {
 	cursor: pointer;
+}
+
+#telSearchDiv {
+	position: absolute;
+	top: 750px;
+	left: 200px;
+	padding: 10px;
+	border-radius: 10px;
+	display: none;
+}
+
+#telSearchTableDiv {
+	maring: 15px;
 }

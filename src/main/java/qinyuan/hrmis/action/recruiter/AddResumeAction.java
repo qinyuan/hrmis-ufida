@@ -2,7 +2,9 @@ package qinyuan.hrmis.action.recruiter;
 
 import qinyuan.hrmis.dao.Gender;
 import qinyuan.hrmis.dao.GenderDao;
+import qinyuan.hrmis.dao.Resume;
 import qinyuan.hrmis.dao.ResumeDao;
+import qinyuan.hrmis.domain.table.SimpleResumeTable;
 import qinyuan.hrmis.domain.user.User;
 import qinyuan.lib.web.SimpleAction;
 
@@ -15,10 +17,9 @@ public class AddResumeAction extends SimpleAction {
 		addResume();
 		String searchTel = getString("searchTel");
 		if (searchTel != null && !searchTel.isEmpty()) {
-			if (ResumeDao.existsTel(searchTel)) {
-				setResult("true");
-			} else {
-				setResult("false");
+			Resume[] rs = ResumeDao.getInstacesByTel(searchTel);
+			if (rs.length > 0) {
+				setResult(new SimpleResumeTable(rs));
 			}
 		}
 	}

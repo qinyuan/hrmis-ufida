@@ -32,18 +32,30 @@ public class HConn implements AutoCloseable {
 	}
 
 	public <T> List<T> getList(String query, Class<T> type) {
+		return getList(query, type, null);
+	}
+
+	public <T> List<T> getList(String query, Class<T> type, HqlParams params) {
 		Query q = sess.createQuery(query);
+		if (params != null) {
+			params.process(q);
+		}
+
 		@SuppressWarnings("unchecked")
 		List<T> list = q.list();
 		return list;
 	}
 
-	public <T> T[] getArray(String query, Class<T> type) {
-		List<T> list = getList(query, type);
+	public <T> T[] getArray(String query, Class<T> type, HqlParams params) {
+		List<T> list = getList(query, type, params);
 		@SuppressWarnings("unchecked")
 		T[] t = (T[]) Array.newInstance(type, list.size());
 		list.toArray(t);
 		return t;
+	}
+
+	public <T> T[] getArray(String query, Class<T> type) {
+		return getArray(query, type, null);
 	}
 
 	public static void main(String[] args) {
@@ -84,17 +96,27 @@ public class HConn implements AutoCloseable {
 	}
 
 	public static <T> List<T> getOneList(String query, Class<T> type) {
+		return getOneList(query, type, null);
+	}
+
+	public static <T> List<T> getOneList(String query, Class<T> type,
+			HqlParams params) {
 		HConn cnn = new HConn();
-		List<T> list = cnn.getList(query, type);
+		List<T> list = cnn.getList(query, type, params);
 		cnn.close();
 		return list;
 	}
 
-	public static <T> T[] getOneArray(String query, Class<T> type) {
+	public static <T> T[] getOneArray(String query, Class<T> type,
+			HqlParams params) {
 		HConn cnn = new HConn();
-		T[] arr = cnn.getArray(query, type);
+		T[] arr = cnn.getArray(query, type, params);
 		cnn.close();
 		return arr;
+	}
+
+	public static <T> T[] getOneArray(String query, Class<T> type) {
+		return getOneArray(query, type, null);
 	}
 
 	public static void saveOne(Object object) {

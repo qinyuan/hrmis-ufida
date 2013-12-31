@@ -1,21 +1,26 @@
 package qinyuan.hrmis.dao;
 
 import java.sql.SQLException;
+
 import qinyuan.hrmis.domain.data.HRMIS;
 import qinyuan.hrmis.lib.db.MyConn;
 import qinyuan.lib.date.MyDate;
 import qinyuan.lib.date.MyDateTime;
 import qinyuan.lib.db.HConn;
+import qinyuan.lib.db.HqlParams;
 
 public class ResumeDao {
 
 	private ResumeDao() {
 	}
-	
-	public static Resume[] getInstacesByTel(String tel){
-		return null;
+
+	public static Resume[] getInstacesByTel(String tel) {
+		HqlParams params = new HqlParams();
+		params.setString("searchTel", tel);
+		return HConn.getOneArray("FROM Resume WHERE tel=:searchTel",
+				Resume.class, params);
 	}
-	
+
 	public static String getApplicantById(int resumeId) throws SQLException {
 		return getFieldById(resumeId, "applicant");
 	}

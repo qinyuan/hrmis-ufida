@@ -124,5 +124,12 @@
 	<div id="addButtonDiv">
 		<img alt="添加" src="/hrmis/recruiter/addButton.png" id="addSubmit">
 	</div>
+	<div id="telSearchDiv">
+		<h3 style="color:red;">此联系方式已经在系统中存在：</h3>
+		<div id="telSearchTableDiv"></div>
+		<p>
+			<q:cancel id="telSearchCloseButton" text="关闭" />
+		</p>
+	</div>
 </body>
 </html>

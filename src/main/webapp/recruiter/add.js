@@ -10,7 +10,6 @@ var getEditor = function() {
 	return CKEDITOR.instances.editor;
 };
 var parseResumeAction = function() {
-	console.log('parseResumeAction');
 	$('span.parseResult').remove();
 	if (sourceMapArray == null)
 		return false;
@@ -42,6 +41,7 @@ var parseResumeAction = function() {
 		// "+value);
 	}
 	$(document).scrollTop(document.body.scrollHeight);
+	validateTel();
 };
 var initSourceMapArray = function() {
 	$.post('resume-source.action', {}, function(data) {
@@ -66,16 +66,29 @@ var resumeLinkChangeAction = function(resumeLink) {
 		$('#resumeNo').val(resumeLink.substring(start, end));
 	}
 };
+var validateTel = function() {
+	var tel=$('#tel').val();
+	$.post('add-resume.action', {
+		'searchTel' : tel
+	}, function(data) {
+		if (isAjaxData(data)) {
+			data = parseAjaxData(data);
+			if (data.indexOf('table') > 0) {
+				var $telSearchTableDiv=$('#telSearchTableDiv');
+				$telSearchTableDiv.html(data);
+				decorateTable($('#telSearchTableDiv'), true);
+				CURTAIN.show("telSearchDiv");
+			} else if (data.length > 0) {
+				alert(data);
+			}
+		}
+	});
+};
 var addSubmitAction = function() {
 	if (!validateResumeInput()) {
 		return false;
 	}
-	var tel = $('#tel').val();
-	if (tel != '') {
-		validateTel(tel, addResume);
-	} else {
-		addResume();
-	}
+	addResume();
 
 	function validateResumeInput() {
 		var applicantObj = $('#applicant');
@@ -107,24 +120,7 @@ var addSubmitAction = function() {
 
 		return true;
 	}
-	function validateTel(tel, callback) {
-		$.post('add-resume.action', {
-			'searchTel' : $('#tel').val()
-		}, function(data) {
-			if (isAjaxData(data)) {
-				data = parseAjaxData(data);
-				if (data == 'true') {
-					if (confirm("该号码已经存在，是否还要添加")) {
-						callback();
-					}
-				} else if (data == 'false') {
-					callback();
-				} else {
-					alert(data);
-				}
-			}
-		});
-	}
+
 	function addResume() {
 		submitForm("addForm", null, function(data) {
 			if (isAjaxData(data)) {
@@ -192,5 +188,12 @@ $(function() {
 	$('#parseResumeButton').click(function(e) {
 		e.preventDefault();
 		parseResumeAction();
+	});
+	$('#tel').blur(function() {
+		validateTel();
+	});
+	$('#telSearchCloseButton').click(function(e){
+		e.preventDefault();
+		CURTAIN.hide();
 	});
 });
