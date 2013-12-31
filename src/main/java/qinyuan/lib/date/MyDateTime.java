@@ -94,7 +94,7 @@ public class MyDateTime {
 			return false;
 
 		int year = Integer.parseInt(strArr[0]);
-		int month = Integer.parseInt(strArr[1]) - 1;
+		int month = Integer.parseInt(strArr[1]);
 		int day = Integer.parseInt(strArr[2]);
 		if (!MyDate.isDate(year + "-" + month + "-" + day))
 			return false;

@@ -1,7 +1,6 @@
 package qinyuan.hrmis.dao;
 
 import java.sql.SQLException;
-import java.util.List;
 import qinyuan.hrmis.domain.data.HRMIS;
 import qinyuan.hrmis.lib.db.MyConn;
 import qinyuan.lib.date.MyDate;
@@ -10,13 +9,15 @@ import qinyuan.lib.db.HConn;
 
 public class ResumeDao {
 
+	private ResumeDao() {
+	}
+	
+	public static Resume[] getInstacesByTel(String tel){
+		return null;
+	}
+	
 	public static String getApplicantById(int resumeId) throws SQLException {
 		return getFieldById(resumeId, "applicant");
-	}
-
-	private static String getFieldById(int resumeId, String fieldName)
-			throws SQLException {
-		return HRMIS.getString("rec_resume", "resume_id", resumeId, fieldName);
 	}
 
 	public static String getContentById(int resumeId) throws SQLException {
@@ -28,17 +29,6 @@ public class ResumeDao {
 				+ "rec_rec_step AS s INNER JOIN rec_recommend AS r "
 				+ "ON r.recommend_id=s.recommend_id AND resume_id=" + resumeId;
 		return HRMIS.getInt(query);
-	}
-
-	private static Resume[] getInstancesByWhereClause(String whereClause) {
-		String query = "FROM Resume";
-		if (whereClause.length() > 0) {
-			query += " WHERE " + whereClause;
-		}
-		List<Resume> list = HConn.getOneList(query, Resume.class);
-		Resume[] rs = new Resume[list.size()];
-		list.toArray(rs);
-		return rs;
 	}
 
 	public static Resume getInstance(int resumeId) {
@@ -196,5 +186,18 @@ public class ResumeDao {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+
+	private static String getFieldById(int resumeId, String fieldName)
+			throws SQLException {
+		return HRMIS.getString("rec_resume", "resume_id", resumeId, fieldName);
+	}
+
+	private static Resume[] getInstancesByWhereClause(String whereClause) {
+		String query = "FROM Resume";
+		if (whereClause.length() > 0) {
+			query += " WHERE " + whereClause;
+		}
+		return HConn.getOneArray(query, Resume.class);
 	}
 }
