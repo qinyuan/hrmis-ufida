@@ -3,36 +3,23 @@ package qinyuan.hrmis.domain.data;
 import java.io.File;
 
 import qinyuan.hrmis.lib.db.MyDataSource;
-import qinyuan.lib.db.MySQLBackup;
-import qinyuan.lib.file.FileUtil;
+import qinyuan.lib.date.MyDateTime;
+import qinyuan.lib.db.MySQLDump;
+import qinyuan.lib.file.FileFormat;
 import qinyuan.lib.file.ZipTool;
 
 public class HRMISBackup {
 
-	private MySQLBackup backup;
-
-	public HRMISBackup() throws Exception {
-		backup = new MySQLBackup("hrmis", new MyDataSource());
+	public File export(String supFolder) {
+		clearBackupFile(supFolder);
+		String fileName = FileFormat.getLinStyleFolder(supFolder) + "hrmis"
+				+ new MyDateTime().toString().replaceAll("\\D", ".") + ".sql";
+		MySQLDump dump = new MySQLDump(DB_NAME, new MyDataSource());
+		dump.export(fileName);
+		return ZipTool.zip(fileName);
 	}
 
-	public String export(String supFolder) throws Exception {
-		clearZipFile(supFolder);
-		backup.export(supFolder);
-		String folderName = backup.getBackupFolderName();
-		String fileName = folderName.substring(0, folderName.length() - 1)
-				+ ".rar";
-		try {
-			ZipTool.zip(folderName, fileName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			FileUtil.delete(folderName);
-		}
-
-		return fileName;
-	}
-
-	private static void clearZipFile(String folder) {
+	private static void clearBackupFile(String folder) {
 		File file = new File(folder);
 		if (!file.isDirectory()) {
 			return;
@@ -41,9 +28,16 @@ public class HRMISBackup {
 		File[] files = file.listFiles();
 		for (File f : files) {
 			String fileName = f.getName();
-			if (fileName.startsWith("hrmis") && fileName.endsWith(".rar")) {
+			if (fileName.startsWith(DB_NAME)
+					&& (fileName.endsWith(".rar") || fileName.endsWith(".sql"))) {
 				f.delete();
 			}
 		}
+	}
+
+	private final static String DB_NAME = "hrmis";
+
+	public static void main(String[] args) {
+		new HRMISBackup().export("d:/test");
 	}
 }

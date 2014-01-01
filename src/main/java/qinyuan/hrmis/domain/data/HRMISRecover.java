@@ -1,9 +1,7 @@
 package qinyuan.hrmis.domain.data;
 
 import java.io.File;
-
-import qinyuan.hrmis.lib.db.MyDataSource;
-import qinyuan.lib.db.MySQLRecovery;
+import qinyuan.hrmis.lib.db.MyConn;
 import qinyuan.lib.file.FileUtil;
 import qinyuan.lib.file.ZipTool;
 
@@ -21,31 +19,23 @@ public class HRMISRecover {
 			return false;
 		}
 
-		String folderName = fileName.substring(0, fileName.length() - 4);
+		String sqlFileName = fileName.replace(".rar", ".sql");
 		try {
-			ZipTool.unzip(fileName, folderName);
+			ZipTool.unzip(fileName, file.getParent());
 		} catch (Exception e) {
 			errorInfo = "解压" + fileName + "失败";
 			e.printStackTrace();
 			return false;
 		}
 
-		MySQLRecovery recover;
-		try {
-			recover = new MySQLRecovery(new MyDataSource());
-		} catch (Exception e) {
-			errorInfo = "数据库连接失败";
-			e.printStackTrace();
-			return false;
-		}
-
-		if (recover.ImportData(folderName)) {
+		try (MyConn cnn = new MyConn()) {
+			cnn.executeSource(sqlFileName);
 			errorInfo = null;
-			FileUtil.delete(folderName);
+			FileUtil.delete(sqlFileName);
 			return true;
-		} else {
-			errorInfo = recover.getErrorInfo();
-			FileUtil.delete(folderName);
+		} catch (Exception e) {
+			errorInfo = "数据库操作失败";
+			e.printStackTrace();
 			return false;
 		}
 	}

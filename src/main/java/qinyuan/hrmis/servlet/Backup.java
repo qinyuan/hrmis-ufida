@@ -13,8 +13,8 @@ public class Backup extends MyServlet {
 		try {
 			HRMISBackup backup = new HRMISBackup();
 			String folder = HrmisConfig.getDataFolderName();
-			String fileName = backup.export(folder);
-			redirect("/download?fileURL=" + fileName);
+			redirect("/download?fileURL="
+					+ backup.export(folder).getAbsolutePath());
 		} catch (Exception e) {
 			e.printStackTrace();
 			print("数据库操作失败");

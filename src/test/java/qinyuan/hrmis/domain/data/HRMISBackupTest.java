@@ -14,9 +14,7 @@ public class HRMISBackupTest {
 	@Test
 	public void test() throws Exception {
 		HRMISBackup backup = new HRMISBackup();
-		String fileName = backup.export(HrmisConfig.getDataFolderName());
-
-		File file = new File(fileName);
+		File file = backup.export(HrmisConfig.getDataFolderName());
 
 		assertTrue(file.exists());
 

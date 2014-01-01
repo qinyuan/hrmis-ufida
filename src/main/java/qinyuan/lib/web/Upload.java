@@ -17,6 +17,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import qinyuan.lib.file.FileFormat;
+
 public abstract class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,11 +43,10 @@ public abstract class Upload extends HttpServlet {
 
 	protected String getDiskFileName(FileItem fileItem) {
 		String uploadFileName = fileItem.getName();
-		uploadFileName = uploadFileName.replace("\\", "/");
+		uploadFileName = FileFormat.getLinStyleFileName(uploadFileName);
 		int start = uploadFileName.lastIndexOf("/");
 		String fileName = uploadFileName.substring(start + 1);
-		String diskFileName = getDiskFolder().replace("\\", "/");
-		return (diskFileName + "/" + fileName).replace("/{2,}", "/");
+		return getDiskFolder() + fileName;
 	}
 
 	protected void doPost(HttpServletRequest request,

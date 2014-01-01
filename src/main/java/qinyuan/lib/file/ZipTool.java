@@ -12,12 +12,22 @@ public class ZipTool {
 	private ZipTool() {
 	}
 
-	public static void zip(String srcPathname, String zipFilepath)
-			throws Exception {
-		File file = new File(srcPathname);
+	public static File zip(String srcPathName) {
+		int lastDotIndex = srcPathName.lastIndexOf('.');
+		String zipFilePath;
+		if (lastDotIndex > 1) {
+			zipFilePath = srcPathName.substring(0, lastDotIndex) + ".rar";
+		} else {
+			zipFilePath = srcPathName + ".rar";
+		}
+		return zip(srcPathName, zipFilePath);
+	}
+
+	public static File zip(String srcPathName, String zipFilePath) {
+		File file = new File(srcPathName);
 		if (!file.exists())
 			throw new RuntimeException("source file or directory "
-					+ srcPathname + " does not exist.");
+					+ srcPathName + " does not exist.");
 
 		Project proj = new Project();
 		FileSet fileSet = new FileSet();
@@ -31,10 +41,11 @@ public class ZipTool {
 
 		Zip zip = new Zip();
 		zip.setProject(proj);
-		zip.setDestFile(new File(zipFilepath));
+		zip.setDestFile(new File(zipFilePath));
 		zip.addFileset(fileSet);
 		zip.setEncoding("UTF-8");
 		zip.execute();
+		return new File(zipFilePath);
 	}
 
 	public static void unzip(String zipFilepath, String destDir)
@@ -55,7 +66,7 @@ public class ZipTool {
 		expand.execute();
 	}
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		zip("e:/test", "e:/test.rar");
 	}
 }
