@@ -99,7 +99,7 @@ public class ResumeModifyTable {
 	}
 
 	private Text getAddTime() {
-		return new Text().setId("m_addTime").setValue(r.getLongAddTime());
+		return new Text().setId("m_addTime").setValue(r.getLongAddTime()).setDisabled(true);
 	}
 
 	private Text getCreator() {
