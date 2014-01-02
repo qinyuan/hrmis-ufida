@@ -22,7 +22,8 @@
 			<form id="addForm" action="add-resume.action" method="post">
 				<q:panel title="简历内容">
 					<textarea id="editor" name="editor"></textarea>
-					<img alt="手动解析" src="/hrmis/recruiter/parseResumeButton.png" id="parseResumeButton">
+					<img alt="手动解析" src="/hrmis/recruiter/parseResumeButton.png"
+						id="parseResumeButton">
 					&nbsp;&nbsp;&nbsp;&nbsp;（注：解析简历是指抓取“简历内容”，自动填充到“简历信息”中）
 				</q:panel>
 				<q:accordion>
@@ -30,7 +31,7 @@
 						<table>
 							<tr>
 								<td>姓名</td>
-								<td style="width:250px;"><q:text id="applicant" /><span>*</span></td>
+								<td style="width: 250px;"><q:text id="applicant" /><span>*</span></td>
 								<td class="split"></td>
 								<td>公司</td>
 								<td><q:text id="company" />&nbsp;&nbsp;</td>
@@ -44,13 +45,11 @@
 							</tr>
 							<tr>
 								<td>性别</td>
-								<td>
-									<select id="genderId" name="genderId">
+								<td><select id="genderId" name="genderId">
 										<option value="未知">未知</option>
 										<option value="男">男</option>
 										<option value="女">女</option>
-									</select>
-								</td>
+								</select></td>
 								<td class="split"></td>
 								<td>简历来源</td>
 								<td><%=new SourceSelect()%>&nbsp;&nbsp;<input
@@ -122,23 +121,26 @@
 		</div>
 	</div>
 	<div id="searchRepeatDiv">
-		<input type="text" id="searchResumeNoText" />
-		<br />
-		<q:button id="searchResumeNoButton" text="简历编号查询" />
+		<p>
+			<input type="text" id="searchResumeNoText" />
+		</p>
+		<p>
+			<q:button id="searchResumeNoButton" text="简历编号查询" />
+		</p>
 		<div id="searchRepeatResultDiv">&nbsp;</div>
 	</div>
 	<div id="addButtonDiv">
 		<img alt="添加" src="/hrmis/recruiter/addButton.png" id="addSubmit">
 	</div>
 	<div id="telSearchDiv">
-		<h3 style="color:red;">该联系方式已经在系统中存在：</h3>
+		<h3 style="color: red;">该联系方式已经在系统中存在：</h3>
 		<div id="telSearchTableDiv"></div>
 		<p>
 			<q:cancel id="telSearchCloseButton" text="关闭" />
 		</p>
 	</div>
 	<div id="resumeNoSearchDiv">
-		<h3 style="color:red;">该简历编号已经在系统中存在：</h3>
+		<h3 style="color: red;">该简历编号已经在系统中存在：</h3>
 		<div id="resumeNoSearchTableDiv"></div>
 		<p>
 			<q:cancel id="resumeNoSearchCloseButton" text="关闭" />

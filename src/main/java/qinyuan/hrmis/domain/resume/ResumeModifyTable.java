@@ -17,6 +17,7 @@ public class ResumeModifyTable {
 
 	private final static String space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	private Resume r;
+	private Table table;
 
 	public ResumeModifyTable(int resumeId) {
 		r = ResumeDao.getInstance(resumeId);
@@ -26,72 +27,49 @@ public class ResumeModifyTable {
 	public String toString() {
 		if (r == null)
 			return "";
-		Table table = new Table();
+		table = new Table();
 
-		TableRow tr = new TableRow();
-		tr.add("姓名", getApplicant() + space, "创建时间", getAddTime());
-		table.add(tr);
+		addRow("姓名", getApplicant(), "创建时间", getAddTime());
+		addRow("创建者", getCreator(), "公司", getCompany());
+		addRow("电话", getTel(), "email", getEmail());
+		addRow("性别", getGender(), "简历来源", getSource());
+		addRow("简历链接", getResumeLink(), "简历编号", getResumeNo());
+		addRow("职位", getPost(), "目标地点", getTargetPlace());
+		addRow("工作年限", getExperience(), "期望薪资", getExpectSalary());
+		addRow("qq", getQq(), "意向", getIntention());
 
-		tr = new TableRow();
-		tr.add("创建者", getCreator() + space, "公司", getCompany());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("电话", getTel() + space, "email", getEmail());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("性别", getGender() + space, "简历来源", getSource());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("简历链接", getResumeLink() + space, "简历编号", getResumeNo());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("职位", getPost() + space, "目标地点", getTargetPlace());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("工作年限", getExperience() + space, "期望薪资", getExpectSalary());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("qq", getQq() + space, "意向", getIntention());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("离职原因");
-		tr.add(getTableData("m_jhReason", r.getJhReason()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("教育情况");
-		tr.add(getTableData("m_education", r.getEducation()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("技术能力");
-		tr.add(getTableData("m_skill", r.getSkill()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("工作经历");
-		tr.add(getTableData("m_prevJob", r.getPrevJob()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("项目经验");
-		tr.add(getTableData("m_prevProj", r.getPrevProj()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("备注");
-		tr.add(getTableData("m_other", r.getOther()));
-		table.add(tr);
+		addRow("离职原因", getTableData("m_jhReason", r.getJhReason()));
+		addRow("教育情况", getTableData("m_education", r.getEducation()));
+		addRow("技术能力", getTableData("m_skill", r.getSkill()));
+		addRow("工作经历", getTableData("m_prevJob", r.getPrevJob()));
+		addRow("项目经验", getTableData("m_prevProj", r.getPrevProj()));
+		addRow("备注", getTableData("m_other", r.getOther()));
 
 		return new Hidden().setId("m_resumeId").setValue(r.getId())
 				+ table.toString();
+	}
+
+	private void addRow(Object str1, TableData str2) {
+		TableRow tr = new TableRow();
+		tr.add(createRightAlignTd(str1 + "&nbsp;&nbsp;"));
+		tr.add(str2);
+		table.add(tr);
+	}
+
+	private void addRow(Object str1, Object str2, Object str3, Object str4) {
+		TableRow tr = new TableRow();
+
+		tr.add(createRightAlignTd(str1 + "&nbsp;&nbsp;"));
+		tr.add(str2 + space);
+		tr.add(createRightAlignTd(str3 + "&nbsp;&nbsp;"));
+		tr.add(str4);
+
+		table.add(tr);
+	}
+
+	private static TableData createRightAlignTd(String text) {
+		return new TableData().setAttr("style", "text-align:right;").setText(
+				text);
 	}
 
 	private Text getApplicant() {
@@ -99,7 +77,8 @@ public class ResumeModifyTable {
 	}
 
 	private Text getAddTime() {
-		return new Text().setId("m_addTime").setValue(r.getLongAddTime()).setDisabled(true);
+		return new Text().setId("m_addTime").setValue(r.getLongAddTime())
+				.setDisabled(true);
 	}
 
 	private Text getCreator() {

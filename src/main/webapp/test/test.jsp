@@ -1,3 +1,4 @@
+<%@page import="qinyuan.hrmis.domain.resume.ResumeModifyTable"%>
 <%@page import="qinyuan.lib.file.PFile"%>
 <%@page import="qinyuan.hrmis.domain.table.SourceMapTable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,15 +12,7 @@
 <q:css href="test" />
 </head>
 <body>
-<%=request.getRequestURI()%>
-<br />
-<%=request.getRequestURL()%>
-<br />
-<%=request.getServerName()%>
-<br />
-<%=request.getServerPort()%>
-<br />
-<%=request.getHeader("User-Agent")%>
+<%=new ResumeModifyTable(799)%>
 </body>
 <q:js src="/lib/ckeditor/ckeditor.js" />
 <q:js src="test" />

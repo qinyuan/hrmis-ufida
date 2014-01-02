@@ -17,17 +17,22 @@ td span {
 	position: fixed;
 	left: 0;
 	top: 200px;
-	padding: 10px;
+	padding: 7px;
 	background-color: lightgray;
 	border-radius: 0 10px 10px 0;
 }
 
-#searchRepeatResultDiv{
+#searchRepeatResultDiv {
+	margin: 8px;
 	color: green;
 }
 
+#searchRepeatDiv p {
+	margin: 8px;
+}
+
 #searchRepeatDiv input {
-	width: 100px;
+	width: 110px;
 }
 
 #parseResumeButton {
