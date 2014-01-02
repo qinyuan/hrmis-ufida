@@ -29,8 +29,9 @@ public class SourceMapTable extends BasePaginatedTable {
 		String query = "SELECT * FROM rec_source AS s "
 				+ "INNER JOIN rec_source_map AS m USING(source_id)";
 		if (sourceId > 0) {
-			query += " AND source_id=" + sourceId;
+			query += " WHERE source_id=" + sourceId;
 		}
+		query += " ORDER BY s.source_id,m.source_map_id";
 		return query;
 	}
 
