@@ -8,7 +8,7 @@ import qinyuan.hrmis.HrmisConfig;
 import qinyuan.hrmis.dao.Resume;
 import qinyuan.hrmis.dao.ResumeDao;
 import qinyuan.lib.file.FileUtil;
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 import qinyuan.lib.office.WordUtil;
 
 public class ResumeDetailExporter {
@@ -67,7 +67,7 @@ public class ResumeDetailExporter {
 		FileUtil.show(file.getAbsolutePath().replaceAll("\\d+.doc", ""));
 	}
 
-	private static Map<String, String> map = PFile.parse("word");
+	private static Map<String, String> map = PropertyUtil.parse("word");
 	private static String paragraphPrefix = map.get("resumeParagraphPrefix");
 	private static String paragraphSuffix = map.get("resumeParagraphSuffix");
 
