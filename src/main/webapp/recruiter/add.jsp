@@ -121,14 +121,27 @@
 			</form>
 		</div>
 	</div>
+	<div id="searchRepeatDiv">
+		<input type="text" id="searchResumeNoText" />
+		<br />
+		<q:button id="searchResumeNoButton" text="简历编号查询" />
+		<div id="searchRepeatResultDiv">&nbsp;</div>
+	</div>
 	<div id="addButtonDiv">
 		<img alt="添加" src="/hrmis/recruiter/addButton.png" id="addSubmit">
 	</div>
 	<div id="telSearchDiv">
-		<h3 style="color:red;">此联系方式已经在系统中存在：</h3>
+		<h3 style="color:red;">该联系方式已经在系统中存在：</h3>
 		<div id="telSearchTableDiv"></div>
 		<p>
 			<q:cancel id="telSearchCloseButton" text="关闭" />
+		</p>
+	</div>
+	<div id="resumeNoSearchDiv">
+		<h3 style="color:red;">该简历编号已经在系统中存在：</h3>
+		<div id="resumeNoSearchTableDiv"></div>
+		<p>
+			<q:cancel id="resumeNoSearchCloseButton" text="关闭" />
 		</p>
 	</div>
 </body>

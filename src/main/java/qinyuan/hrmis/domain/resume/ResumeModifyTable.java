@@ -29,7 +29,7 @@ public class ResumeModifyTable {
 		Table table = new Table();
 
 		TableRow tr = new TableRow();
-		tr.add("姓名", getApplicant() + space, "添加时间", getAddTime());
+		tr.add("姓名", getApplicant() + space, "创建时间", getAddTime());
 		table.add(tr);
 
 		tr = new TableRow();

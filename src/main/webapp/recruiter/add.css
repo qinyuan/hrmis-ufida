@@ -13,19 +13,36 @@ td span {
 	cursor: pointer;
 }
 
+#searchRepeatDiv {
+	position: fixed;
+	left: 0;
+	top: 200px;
+	padding: 10px;
+	background-color: lightgray;
+	border-radius: 0 10px 10px 0;
+}
+
+#searchRepeatResultDiv{
+	color: green;
+}
+
+#searchRepeatDiv input {
+	width: 100px;
+}
+
 #parseResumeButton {
 	cursor: pointer;
 }
 
-#telSearchDiv {
-	position: absolute;
-	top: 750px;
+#telSearchDiv,#resumeNoSearchDiv {
+	position: fixed;
+	top: 80px;
 	left: 200px;
 	padding: 10px;
 	border-radius: 10px;
 	display: none;
 }
 
-#telSearchTableDiv {
+#telSearchTableDiv,#resumeNoSearchTableDiv {
 	maring: 15px;
 }

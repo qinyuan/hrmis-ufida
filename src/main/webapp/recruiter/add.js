@@ -42,6 +42,7 @@ var parseResumeAction = function() {
 	}
 	$(document).scrollTop(document.body.scrollHeight);
 	validateTel();
+	validateResumeNo();
 };
 var initSourceMapArray = function() {
 	$.post('resume-source.action', {}, function(data) {
@@ -66,15 +67,58 @@ var resumeLinkChangeAction = function(resumeLink) {
 		$('#resumeNo').val(resumeLink.substring(start, end));
 	}
 };
+var validateResumeNo = function(callBack) {
+	var resumeNo = $('#resumeNo').val();
+	postSearchResumeNo(resumeNo);
+};
+var postSearchResumeNo = function(resumeNo, callBack) {
+	$.post('add-resume.action', {
+		'searchResumeNo' : resumeNo
+	}, function(data) {
+		if (isAjaxData(data)) {
+			data = parseAjaxData(data);
+			if (data.indexOf('table') > 0) {
+				var $telSearchTableDiv = $('#resumeNoSearchTableDiv');
+				$telSearchTableDiv.html(data);
+				decorateTable($('#resumeNoSearchTableDiv'), true);
+				CURTAIN.show("resumeNoSearchDiv");
+				if(callBack){
+					callBack(true);
+				}
+			} else if (data.length > 0) {
+				alert(data);
+			} else {
+				if(callBack){
+					callBack(false);
+				}
+			}
+		}
+	});
+};
+var searchResumeNoAction = function() {
+	var searchResumeNo = $('#searchResumeNoText').val();
+	var $searchRepeatResultDiv=$('#searchRepeatResultDiv');
+	if($.trim(searchResumeNo)==''){
+		$searchRepeatResultDiv.html('未输入');
+		return;
+	}
+	postSearchResumeNo(searchResumeNo, function(repeat) {
+		if (!repeat) {
+			$searchRepeatResultDiv.html('编号未被录入');
+		}else{
+			$searchRepeatResultDiv.html('&nbsp;');
+		}
+	});
+};
 var validateTel = function() {
-	var tel=$('#tel').val();
+	var tel = $('#tel').val();
 	$.post('add-resume.action', {
 		'searchTel' : tel
 	}, function(data) {
 		if (isAjaxData(data)) {
 			data = parseAjaxData(data);
 			if (data.indexOf('table') > 0) {
-				var $telSearchTableDiv=$('#telSearchTableDiv');
+				var $telSearchTableDiv = $('#telSearchTableDiv');
 				$telSearchTableDiv.html(data);
 				decorateTable($('#telSearchTableDiv'), true);
 				CURTAIN.show("telSearchDiv");
@@ -91,11 +135,11 @@ var addSubmitAction = function() {
 	addResume();
 
 	function validateResumeInput() {
-		var applicantObj = $('#applicant');
-		var applicant = $.trim(applicantObj.val());
+		var $applicant = $('#applicant');
+		var applicant = $.trim($applicant.val());
 		if (applicant == "") {
 			alert("姓名未填写");
-			applicantObj.focus();
+			$applicant.focus();
 			return false;
 		}
 
@@ -108,6 +152,14 @@ var addSubmitAction = function() {
 		} else if (!numeric(experience)) {
 			alert("工作年限应为数字格式");
 			$experience.select();
+			return false;
+		}
+
+		var $resumeNo = $('#resumeNo');
+		var resumeNo = $.trim($resumeNo.val());
+		if (resumeNo == "") {
+			alert("简历编号未填写");
+			$resumeNo.focus();
 			return false;
 		}
 
@@ -192,8 +244,20 @@ $(function() {
 	$('#tel').blur(function() {
 		validateTel();
 	});
-	$('#telSearchCloseButton').click(function(e){
+	$('#resumeNo').blur(function() {
+		validateResumeNo();
+	});
+	$('a[id$="CloseButton"]').click(function(e) {
 		e.preventDefault();
 		CURTAIN.hide();
+	});
+	$('#searchResumeNoButton').click(function(e) {
+		e.preventDefault();
+		searchResumeNoAction();
+	});
+	$('#searchResumeNoText').keyup(function(e) {
+		if (e.keyCode === 86 && e.ctrlKey) {
+			setTimeout(searchResumeNoAction, 200);
+		}
 	});
 });

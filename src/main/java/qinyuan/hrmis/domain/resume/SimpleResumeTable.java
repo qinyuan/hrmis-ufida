@@ -1,7 +1,6 @@
-package qinyuan.hrmis.domain.table;
+package qinyuan.hrmis.domain.resume;
 
 import qinyuan.hrmis.dao.Resume;
-import qinyuan.hrmis.dao.ResumeDao;
 import qinyuan.lib.web.html.Anchor;
 import qinyuan.lib.web.html.Table;
 import qinyuan.lib.web.html.TableRow;
@@ -41,6 +40,7 @@ public class SimpleResumeTable {
 			postName += "(" + r.getTargetPlaceName() + ")";
 		}
 		tr.add(postName);
+		tr.add(r.getResumeNo());
 		tr.add(r.getTel());
 
 		String intention = r.getIntention();
@@ -59,10 +59,11 @@ public class SimpleResumeTable {
 		TableRow th = new TableRow();
 
 		th.add("姓名");
-		th.add("创建日期");
-		th.add("修改日期");
+		th.add("创建时间");
+		th.add("修改时间");
 		th.add("创建者");
 		th.add("职位");
+		th.add("简历编号");
 		th.add("电话");
 		th.add("意向");
 		th.add("期望薪资");
@@ -77,10 +78,7 @@ public class SimpleResumeTable {
 
 		return table.toString();
 	}
-	
+
 	public static void main(String[] args) {
-		Resume[] rs=ResumeDao.getInstacesByTel("18918192577");
-		SimpleResumeTable srt=new SimpleResumeTable(rs);
-		System.out.println(srt);
 	}
 }

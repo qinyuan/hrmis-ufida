@@ -271,8 +271,8 @@ public class ResumeTable extends BasePaginatedTable {
 	@Override
 	protected void doTableHead(TableHead th) {
 		th.add("姓名", 40);
-		th.add("创建日期", 100);
-		th.add("修改日期", 100);
+		th.add("创建时间", 100);
+		th.add("修改时间", 100);
 		th.add("创建者", 50);
 		th.add("职位", 70);
 		th.add("电话", 70);

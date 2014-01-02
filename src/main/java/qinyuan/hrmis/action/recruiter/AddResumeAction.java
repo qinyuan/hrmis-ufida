@@ -4,7 +4,7 @@ import qinyuan.hrmis.dao.Gender;
 import qinyuan.hrmis.dao.GenderDao;
 import qinyuan.hrmis.dao.Resume;
 import qinyuan.hrmis.dao.ResumeDao;
-import qinyuan.hrmis.domain.table.SimpleResumeTable;
+import qinyuan.hrmis.domain.resume.SimpleResumeTable;
 import qinyuan.hrmis.domain.user.User;
 import qinyuan.lib.web.SimpleAction;
 
@@ -15,9 +15,24 @@ public class AddResumeAction extends SimpleAction {
 	@Override
 	protected void exec() throws Exception {
 		addResume();
+		searchTel();
+		searchResumeNo();
+	}
+
+	private void searchResumeNo() {
+		String searchResumeNo = getString("searchResumeNo");
+		if (!empty(searchResumeNo)) {
+			Resume[] rs = ResumeDao.getInstancesByResumeNo(searchResumeNo);
+			if (rs.length > 0) {
+				setResult(new SimpleResumeTable(rs));
+			}
+		}
+	}
+
+	private void searchTel() {
 		String searchTel = getString("searchTel");
-		if (searchTel != null && !searchTel.isEmpty()) {
-			Resume[] rs = ResumeDao.getInstacesByTel(searchTel);
+		if (!empty(searchTel)) {
+			Resume[] rs = ResumeDao.getInstancesByTel(searchTel);
 			if (rs.length > 0) {
 				setResult(new SimpleResumeTable(rs));
 			}

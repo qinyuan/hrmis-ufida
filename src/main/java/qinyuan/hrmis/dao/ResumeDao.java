@@ -14,7 +14,14 @@ public class ResumeDao {
 	private ResumeDao() {
 	}
 
-	public static Resume[] getInstacesByTel(String tel) {
+	public static Resume[] getInstancesByResumeNo(String resumeNo) {
+		HqlParams params = new HqlParams();
+		params.setString("searchResumeNo", resumeNo);
+		return HConn.getOneArray("FROM Resume WHERE resumeNo=:searchResumeNo",
+				Resume.class, params);
+	}
+
+	public static Resume[] getInstancesByTel(String tel) {
 		HqlParams params = new HqlParams();
 		params.setString("searchTel", tel);
 		return HConn.getOneArray("FROM Resume WHERE tel=:searchTel",
@@ -121,7 +128,7 @@ public class ResumeDao {
 		}
 	}
 
-	public static void mdf(int resumeId,/* String addTime,*/ String applicant,
+	public static void mdf(int resumeId,/* String addTime, */String applicant,
 			String company, int postId, String tel, String email, String qq,
 			String resumeNo, String resumeLink, int sourceId, String intention,
 			double experience, String expectSalary, String jhReason,
@@ -151,8 +158,8 @@ public class ResumeDao {
 		r.setOther(other);
 		r.setIntentionRed(intentionRed);
 		/*
-		r.setAddTime(addTime);
-		*/
+		 * r.setAddTime(addTime);
+		 */
 		r.setIntentionRed(intentionRed);
 		r.setTargetPlace(TargetPlaceDao.getInstance(targetPlaceId));
 		r.setDownloaded(downloaded);
