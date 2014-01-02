@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.sql.SQLException;
+
 import qinyuan.hrmis.lib.db.MyConn;
 import qinyuan.hrmis.lib.db.MyDataSource;
 import qinyuan.lib.date.MyTimeRecord;
@@ -22,19 +23,8 @@ public class MySQLDump {
 	}
 
 	public void export(String fileName) {
-		if (!fileName.endsWith(".sql")) {
-			throw new RuntimeException("incorrect sql file format " + fileName);
-		}
 		File file = new File(fileName);
-		if (!file.isFile()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("can not create file "
-						+ file.getAbsolutePath());
-			}
-		}
+		validateFile(file);
 
 		try (FileOutputStream fos = new FileOutputStream(file);
 				OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
@@ -42,6 +32,7 @@ public class MySQLDump {
 			MySQLConn cnn = ds.getConn();
 			cnn.use(dbName);
 
+			bw.write(getHeader());
 			bw.write(getCreateDatabaseCommand(dbName));
 
 			String[] tableNames = getTableNames(cnn);
@@ -59,13 +50,39 @@ public class MySQLDump {
 		}
 	}
 
+	private static String getHeader() {
+		StringBuilder s = new StringBuilder();
+		s.append("\n");
+		s.append("SET SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\";\n");
+		s.append("SET time_zone = \"+00:00\";");
+		s.append("\n");
+		return s.toString();
+	}
+
+	private static void validateFile(File file) {
+		String fileName = file.getAbsolutePath();
+		if (!fileName.endsWith(".sql")) {
+			throw new RuntimeException("incorrect sql file format " + fileName);
+		}
+		if (!file.isFile()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("can not create file "
+						+ file.getAbsolutePath());
+			}
+		}
+	}
+
 	private static void insertValues(BufferedWriter bw, MySQLConn cnn,
 			String tableName) throws SQLException, IOException {
 		bw.write("\n\n/* insert values into " + tableName + "*/\n");
 
 		cnn.execute("SELECT * FROM " + tableName);
-		StringBuilder s = new StringBuilder("INSERT INTO `" + tableName
-				+ "` VALUES");
+		StringBuilder s = new StringBuilder("INSERT INTO `" + tableName + "` ");
+		s.append(getFields(cnn, tableName));
+		s.append(" VALUES");
 		bw.write(s.toString());
 		boolean firstRow = true;
 		while (cnn.next()) {
@@ -77,6 +94,19 @@ public class MySQLDump {
 			bw.write(getValues(cnn));
 		}
 		bw.write(";\n\n");
+	}
+
+	private static Object getFields(MySQLConn cnn, String tableName)
+			throws SQLException {
+		cnn.execute("DESC " + tableName);
+		StringBuilder s = new StringBuilder("(");
+		while (cnn.next()) {
+			s.append(cnn.getString(1));
+			s.append(",");
+		}
+		s.deleteCharAt(s.length() - 1);
+		s.append(")");
+		return s.toString();
 	}
 
 	private static String getValues(MySQLConn cnn) throws SQLException {
@@ -141,9 +171,9 @@ public class MySQLDump {
 		cnn.close();
 
 		MyTimeRecord r = new MyTimeRecord();
-		String dbName = "hrmis";
+		String dbName = "test";
 		MySQLDump d = new MySQLDump(dbName, new MyDataSource());
-		d.export("d:/test/test.sql");
+		d.export("d:/test.sql");
 		r.print("end");
 	}
 }

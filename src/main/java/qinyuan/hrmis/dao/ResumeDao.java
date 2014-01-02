@@ -121,7 +121,7 @@ public class ResumeDao {
 		}
 	}
 
-	public static void mdf(int resumeId, String addTime, String applicant,
+	public static void mdf(int resumeId,/* String addTime,*/ String applicant,
 			String company, int postId, String tel, String email, String qq,
 			String resumeNo, String resumeLink, int sourceId, String intention,
 			double experience, String expectSalary, String jhReason,
@@ -150,7 +150,9 @@ public class ResumeDao {
 		r.setPrevProj(prevProj);
 		r.setOther(other);
 		r.setIntentionRed(intentionRed);
+		/*
 		r.setAddTime(addTime);
+		*/
 		r.setIntentionRed(intentionRed);
 		r.setTargetPlace(TargetPlaceDao.getInstance(targetPlaceId));
 		r.setDownloaded(downloaded);

@@ -55,9 +55,11 @@ public class MyResumeAction extends MyAction {
 
 		String applicant = getString("m_applicant");
 
+		/*
 		String addTime = getString("m_addTime");
 		if (!MyDateTime.isDateTime(addTime))
 			return;
+			*/
 
 		String company = getString("m_company");
 
@@ -111,7 +113,7 @@ public class MyResumeAction extends MyAction {
 		}
 
 		try {
-			ResumeDao.mdf(resumeId, addTime, applicant, company, postId, tel,
+			ResumeDao.mdf(resumeId,/* addTime, */applicant, company, postId, tel,
 					email, qq, resumeNo, resumeLink, sourceId, intention,
 					experience, expectSalary, jhReason, education, skill,
 					prevJob, prevProj, other, intentionRed, targetPlaceId,
