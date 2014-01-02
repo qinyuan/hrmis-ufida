@@ -11,7 +11,15 @@
 <q:css href="test" />
 </head>
 <body>
-	<%=PFile.parse("tax_rate") %><br />
+<%=request.getRequestURI()%>
+<br />
+<%=request.getRequestURL()%>
+<br />
+<%=request.getServerName()%>
+<br />
+<%=request.getServerPort()%>
+<br />
+<%=request.getHeader("User-Agent")%>
 </body>
 <q:js src="/lib/ckeditor/ckeditor.js" />
 <q:js src="test" />

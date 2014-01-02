@@ -10,11 +10,13 @@ import qinyuan.lib.lang.MyMath;
 
 public class LoginManager {
 
-	private final static String COOKIE_KEY = "hrmisAutoLogin";
-
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession session;
+
+	private String getCookieKey() {
+		return request.getServerName() + "HrmisAutoLogin";
+	}
 
 	public LoginManager(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -60,7 +62,7 @@ public class LoginManager {
 		if (bool) {
 			User user = getInputUser();
 			if (inputUser != null) {
-				String value = MyMath.getRandomStr(150);
+				String value = MyMath.getRandomStr(50);
 				setCookie(value, 3600 * 24 * 90);
 				saveCookieToDB(getRemoteAddr(), value, user.getId());
 			}
@@ -92,7 +94,7 @@ public class LoginManager {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie c : cookies) {
-				if (c.getName().equals(COOKIE_KEY)) {
+				if (c.getName().equals(getCookieKey())) {
 					return c.getValue();
 				}
 			}
@@ -101,7 +103,7 @@ public class LoginManager {
 	}
 
 	private void setCookie(String value, int seconds) throws SQLException {
-		Cookie cookie = new Cookie(COOKIE_KEY, value);
+		Cookie cookie = new Cookie(getCookieKey(), value);
 		cookie.setMaxAge(seconds);
 		cookie.setPath("/hrmis/");
 		response.addCookie(cookie);
