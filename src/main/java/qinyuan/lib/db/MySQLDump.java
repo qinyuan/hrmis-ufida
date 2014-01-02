@@ -17,7 +17,6 @@ public class MySQLDump {
 	private String dbName;
 
 	public MySQLDump(String dbName, MySQLDataSource ds) {
-		// create MySQL connection
 		this.dbName = dbName;
 		this.ds = ds;
 	}
@@ -38,9 +37,6 @@ public class MySQLDump {
 			String[] tableNames = getTableNames(cnn);
 			for (String tableName : tableNames) {
 				bw.write(getCreateTableCommand(cnn, tableName));
-			}
-
-			for (String tableName : tableNames) {
 				insertValues(bw, cnn, tableName);
 			}
 
@@ -54,7 +50,8 @@ public class MySQLDump {
 		StringBuilder s = new StringBuilder();
 		s.append("\n");
 		s.append("SET SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\";\n");
-		s.append("SET time_zone = \"+00:00\";");
+		s.append("SET time_zone = \"+00:00\";\n");
+		s.append("SET GLOBAL max_allowed_packet=1024*1024*64;");
 		s.append("\n");
 		return s.toString();
 	}
@@ -79,11 +76,15 @@ public class MySQLDump {
 			String tableName) throws SQLException, IOException {
 		bw.write("\n\n/* insert values into " + tableName + "*/\n");
 
+		MySQLFields mf = new MySQLFields(cnn, tableName);
 		cnn.execute("SELECT * FROM " + tableName);
-		StringBuilder s = new StringBuilder("INSERT INTO `" + tableName + "` ");
-		s.append(getFields(cnn, tableName));
-		s.append(" VALUES");
-		bw.write(s.toString());
+		if (!cnn.next()) {
+			return;
+		}
+		cnn.beforeFirst();
+
+		bw.write(mf.getInsertClause());
+		int[] types = mf.getTypes();
 		boolean firstRow = true;
 		while (cnn.next()) {
 			if (firstRow) {
@@ -91,25 +92,13 @@ public class MySQLDump {
 			} else {
 				bw.write(",");
 			}
-			bw.write(getValues(cnn));
+			bw.write("\n" + getValues(cnn, types));
 		}
 		bw.write(";\n\n");
 	}
 
-	private static Object getFields(MySQLConn cnn, String tableName)
+	private static String getValues(MySQLConn cnn, int[] types)
 			throws SQLException {
-		cnn.execute("DESC " + tableName);
-		StringBuilder s = new StringBuilder("(");
-		while (cnn.next()) {
-			s.append(cnn.getString(1));
-			s.append(",");
-		}
-		s.deleteCharAt(s.length() - 1);
-		s.append(")");
-		return s.toString();
-	}
-
-	private static String getValues(MySQLConn cnn) throws SQLException {
 		int colCount = cnn.getColCount();
 		StringBuilder s = new StringBuilder("(");
 		for (int i = 1; i <= colCount; i++) {
@@ -117,7 +106,11 @@ public class MySQLDump {
 			if (value == null) {
 				value = "NULL";
 			} else {
-				value = "'" + value.replace("'", "''") + "'";
+				value = value.replace("'", "''").replace("\\", "\\\\")
+						.replace("\n", "\\n");
+				if (types[i - 1] != MySQLFields.INT) {
+					value = "'" + value + "'";
+				}
 			}
 			s.append(value);
 			s.append(",");
@@ -171,9 +164,52 @@ public class MySQLDump {
 		cnn.close();
 
 		MyTimeRecord r = new MyTimeRecord();
-		String dbName = "test";
+		String dbName = "hrmis";
 		MySQLDump d = new MySQLDump(dbName, new MyDataSource());
 		d.export("d:/test.sql");
 		r.print("end");
+	}
+
+	private static class MySQLFields {
+		final static int INT = 0;
+		private String[] names;
+		private int[] types;
+		private String tableName;
+
+		MySQLFields(MySQLConn cnn, String tableName) throws SQLException {
+			this.tableName = tableName;
+			cnn.execute("DESC " + tableName);
+			names = new String[cnn.getRowCount()];
+			types = new int[cnn.getRowCount()];
+			for (int i = 0; cnn.next(); i++) {
+				names[i] = cnn.getString(1);
+				String type = cnn.getString(2).toLowerCase();
+				types[i] = type.indexOf("int") >= 0 ? 0 : 1;
+			}
+		}
+
+		private String getFields() {
+			StringBuilder s = new StringBuilder("(");
+			for (int i = 0; i < names.length; i++) {
+				if (i > 0) {
+					s.append(", ");
+				}
+				s.append("`" + names[i] + "`");
+			}
+			s.append(")");
+			return s.toString();
+		}
+
+		String getInsertClause() {
+			StringBuilder s = new StringBuilder("INSERT INTO `" + tableName
+					+ "` ");
+			s.append(getFields());
+			s.append(" VALUES");
+			return s.toString();
+		}
+
+		int[] getTypes() {
+			return types;
+		}
 	}
 }
