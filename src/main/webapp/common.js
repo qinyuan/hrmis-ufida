@@ -4,6 +4,14 @@ $(function() {
 		decorateTable($('div.easyui-panel'));
 	}
 });
+jQuery.fn.extend({
+	aclick : function(callback) {
+		return this.click(function(e) {
+			e.preventDefault();
+			callback.call(this, e);
+		});
+	}
+});
 function ClickedSpan($span) {
 	var self = this, select = null, unselect = null;
 	this.checkedSpan = null;
@@ -154,7 +162,7 @@ function addLocationParamAndReload(paramObj) {
 
 	function pushSearch(name, value) {
 		search = search.replace('?', '');
-		var searchArr=null;
+		var searchArr = null;
 		if (search == '') {
 			searchArr = new Array();
 			searchArr[0] = name + "=" + value;

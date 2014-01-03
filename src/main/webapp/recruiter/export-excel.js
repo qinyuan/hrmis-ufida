@@ -1,8 +1,8 @@
 $(function(){
-	$('#exportDailyButton').click(function(){
+	$('#exportDailyButton').aclick(function(){
 		exportReportByType("daily");
 	});
-	$('#exportWeeklyButton').click(function(){
+	$('#exportWeeklyButton').aclick(function(){
 		exportReportByType("weekly");
 	});
 	function exportReportByType(type){

@@ -199,7 +199,7 @@ public class ResumeExporter {
 		ResumeExporter e = new ResumeExporter();
 		e.setStartDate("2012-1-1");
 		e.setEndDate("2013-12-12");
-		FileUtil.show(e.exportWeeklyReport());
+		FileUtil.show(e.exportDailyReport());
 	}
 
 	private static class RowUpdator {
