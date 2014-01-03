@@ -53,20 +53,6 @@ var initSourceMapArray = function() {
 		}
 	});
 };
-var resumeLinkChangeAction = function(resumeLink) {
-	if (resumeLink.indexOf('zhaopin.com') > 0) {
-		var start = resumeLink.search(/J[A-Z]/);
-		var end = resumeLink.indexOf('_', start);
-		$('#sourceId').val(3);
-		$('#resumeNo').val(resumeLink.substring(start, end));
-	} else if (resumeLink.indexOf('51job.com') > 0) {
-		var startStr = 'hidUserID=';
-		var start = resumeLink.indexOf(startStr) + startStr.length;
-		var end = resumeLink.indexOf('&', start);
-		$('#sourceId').val(2);
-		$('#resumeNo').val(resumeLink.substring(start, end));
-	}
-};
 var validateResumeNo = function(callBack) {
 	var resumeNo = $('#resumeNo').val();
 	postSearchResumeNo(resumeNo);
@@ -157,8 +143,10 @@ var addSubmitAction = function() {
 
 		var $resumeNo = $('#resumeNo');
 		var resumeNo = $.trim($resumeNo.val());
-		if (resumeNo == "") {
-			alert("简历编号未填写");
+		var sourceId=$('#sourceId').val();
+		// 2 and 3 represent 51job and hr.zhaopin
+		if (resumeNo == "" && (sourceId==2 || sourceId==3)) {
+			alert("简历编号未填写(前程无忧与智联招聘均要求填写简历编号)");
 			$resumeNo.focus();
 			return false;
 		}
@@ -230,9 +218,6 @@ $(function() {
 	$('#addSubmit').click(function(e) {
 		e.preventDefault();
 		addSubmitAction();
-	});
-	$('#resumeLink').change(function() {
-		resumeLinkChangeAction(this.value);
 	});
 
 	initSourceMapArray();
