@@ -22,7 +22,9 @@ public class ExportResumeDetail extends MyServlet {
 			int resumeId = parseInt(resumeIdStr);
 			Resume r = ResumeDao.getInstance(resumeId);
 			try {
-				File file = ResumeDetailExporter.exportWord(r);
+				String exportTel = getParameter("exportTel");
+				File file = ResumeDetailExporter.exportWord(r,
+						exportTel != null && exportTel.equals("true"));
 				if (file != null) {
 					String fileName = getFileName(r);
 					redirect("/download?fileURL=" + file.getAbsolutePath()

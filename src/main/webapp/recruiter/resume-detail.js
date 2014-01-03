@@ -8,9 +8,15 @@ $(document).ready(function() {
 	decorateTable($table.eq(1), true);
 
 	$("#exportButton").click(function() {
+		CURTAIN.show("exportOptionDiv");
+	});
+	$('#exportOk').click(function(e) {
+		e.preventDefault();
 		var resumeId = rightStr(location.href.toString(), '?');
 		resumeId = resumeId.replace(/\D/g, '');
 		var href = "ExportResumeDetail?resumeId=" + resumeId;
+		href += '&exportTel=' + $('#exportTel').get(0).checked;
+		CURTAIN.hide();
 		window.open(href);
 	});
 });

@@ -18,6 +18,10 @@ public class ResumeDetailExporter {
 	}
 
 	public static File exportWord(Resume r) throws Exception {
+		return exportWord(r, true);
+	}
+
+	public static File exportWord(Resume r, boolean exportTel) throws Exception {
 		if (r == null) {
 			throw new RuntimeException("invalid resume");
 		}
@@ -32,7 +36,11 @@ public class ResumeDetailExporter {
 		tp.replace("experience",
 				String.valueOf(r.getExperience()).replace(".0", ""));
 		tp.replace("gender", r.getGenderId() == 1 ? "" : r.getGenderName());
-		tp.replace("tel", r.getTel());
+		if (exportTel) {
+			tp.replace("tel", "电    话：" + r.getTel());
+		} else {
+			tp.replace("tel", "");
+		}
 		tp.replace("education", r.getEducation());
 		tp.replace("prevJob", r.getPrevJob());
 		tp.replace("prevProj", r.getPrevProj());
