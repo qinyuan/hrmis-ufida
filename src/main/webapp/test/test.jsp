@@ -1,3 +1,4 @@
+<%@page import="qinyuan.hrmis.domain.resume.statistics.ResumeStatistics"%>
 <%@page import="qinyuan.hrmis.domain.resume.ResumeModifyTable"%>
 <%@page import="qinyuan.lib.file.PFile"%>
 <%@page import="qinyuan.hrmis.domain.table.SourceMapTable"%>
@@ -12,7 +13,7 @@
 <q:css href="test" />
 </head>
 <body>
-<%=new ResumeModifyTable(799)%>
+<%=new ResumeStatistics()%>
 </body>
 <q:js src="/lib/ckeditor/ckeditor.js" />
 <q:js src="test" />

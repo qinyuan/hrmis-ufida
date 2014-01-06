@@ -54,11 +54,6 @@ public class TableRow extends BodyElement {
 				append(new TableData(isHead).setText(obj.toString()));
 			}
 		}
-		for (int i = objs.length - 1; i >= 0; i--) {
-			if (objs[i] != null) {
-				append(new TableData(isHead).setText(objs[i].toString()));
-			}
-		}
 		return this;
 	}
 
