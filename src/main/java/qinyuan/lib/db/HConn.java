@@ -2,7 +2,6 @@ package qinyuan.lib.db;
 
 import java.lang.reflect.Array;
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,8 +12,20 @@ public class HConn implements AutoCloseable {
 	private Transaction trans;
 
 	public HConn() {
-		sess = HibernateUtil.getSession();
-		trans = sess.beginTransaction();
+		int i = 0;
+		while ((sess == null || trans == null) && (++i < 10)) {
+			try {
+				sess = HibernateUtil.getSession();
+				trans = sess.beginTransaction();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		HConn cnn = new HConn();
+		cnn.close();
 	}
 
 	public void delete(Class<?> type, int id) {
@@ -56,9 +67,6 @@ public class HConn implements AutoCloseable {
 
 	public <T> T[] getArray(String query, Class<T> type) {
 		return getArray(query, type, null);
-	}
-
-	public static void main(String[] args) {
 	}
 
 	public void save(Object object) {
