@@ -5,7 +5,7 @@
 <q:button text="客户信息" id="remarkCustomer" disable="true" />
 <q:button text="需求信息" id="remarkDemand" disable="true" />
 
-<div class="easyui-layout" style="width: 900px; height: 500px;">
+<div class="easyui-layout" style="width: 980px; height: 500px;">
 
 	<div id="leftDiv"
 		data-options="region:'west',split:true,collapsible:false" title="客户"
@@ -23,7 +23,7 @@
 
 	<div id="rightDiv"
 		data-options="region:'east',split:true,collapsible:false" title="需求明细"
-		style="width: 520px;">
+		style="width: 600px;">
 		<div id="detailDiv"></div>
 		<div id="mdfDiv">
 			<q:ok id="mdfOK" text="修改" />
