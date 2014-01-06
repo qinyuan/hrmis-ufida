@@ -32,9 +32,9 @@ public class ResumeDetailExporter {
 
 		String xmlFileContent = FileUtil.readAll(xmlFileName);
 		TextReplace tp = new TextReplace(xmlFileContent);
+
 		tp.replace("name", r.getApplicant());
-		tp.replace("experience",
-				String.valueOf(r.getExperience()).replace(".0", ""));
+		tp.replace("experience", getExperience(r));
 		tp.replace("gender", r.getGenderId() == 1 ? "" : r.getGenderName());
 		if (exportTel) {
 			tp.replace("tel", "电    话：" + r.getTel());
@@ -44,11 +44,20 @@ public class ResumeDetailExporter {
 		tp.replace("education", r.getEducation());
 		tp.replace("prevJob", r.getPrevJob());
 		tp.replace("prevProj", r.getPrevProj());
-		FileUtil.write(xmlFileName, tp.text);
 
+		FileUtil.write(xmlFileName, tp.text);
 		String docFileName = xmlFileName.replace(".xml", ".doc");
 		WordUtil.createDocByXml(xmlFileName, docFileName);
 		return new File(docFileName);
+	}
+
+	private static String getExperience(Resume r) {
+		Double experience = r.getExperience();
+		String str = experience == null ? "" : String.valueOf(experience);
+		if (str.length() > 0) {
+			str = str.replace(".0", "") + "年";
+		}
+		return str;
 	}
 
 	private static void clearFile() {

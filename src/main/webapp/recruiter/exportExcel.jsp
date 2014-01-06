@@ -19,24 +19,21 @@
 					<%@include file="/sess/start-date.jsp"%>
 					<%@include file="/sess/end-date.jsp"%>
 					<div id="columnsSelectDiv">
-						<b>导出列：</b>
-						<br /><br />
+						<b>导出列：</b> <br /> <br />
 						<%
-							String[] strs=new String[]{"日期","公司","名字","职位","电话","邮箱","QQ","来源","意向","工作年限","薪水","备注","推送客户"};
-							for(String str:strs){
-								%>
-									
-								<%
+							String[] strs = new String[] { "日期", "公司", "名字", "职位", "电话", "邮箱",
+									"QQ", "来源", "意向", "工作年限", "薪水", "备注", "推送客户" };
+							for (String str : strs) {
+						%>
+								<input type="checkbox" checked="checked" disabled="disabled" /><%=str%>
+								&nbsp;&nbsp;
+						<%
 							}
 						%>
-						<input type="checkbox" checked="checked" disabled="disabled" />日期
-						&nbsp;&nbsp;&nbsp;
-						<input type="checkbox" checked="checked" disabled="disabled" />公司
-						<input type="checkbox" checked="checked" disabled="disabled" />公司
-
 					</div>
 				</div>
 			</div>
+
 			<div id="buttonDiv">
 				<q:button text="导出日报表" id="exportDailyButton" />
 				&nbsp;&nbsp;&nbsp;&nbsp;
