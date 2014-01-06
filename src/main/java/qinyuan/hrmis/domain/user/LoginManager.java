@@ -67,8 +67,9 @@ public class LoginManager {
 				saveCookieToDB(getRemoteAddr(), value, user.getId());
 			}
 		} else {
+			String cookieValue = getCookieValue();
 			setCookie(null, 0);
-			deleteCookieFromDB(getRemoteAddr());
+			deleteCookieFromDB(cookieValue, getRemoteAddr());
 		}
 	}
 
@@ -130,11 +131,13 @@ public class LoginManager {
 		return inputUser;
 	}
 
-	private static void deleteCookieFromDB(String remoteAddr)
+	private static void deleteCookieFromDB(String remoteAddr, String cookieValue)
 			throws SQLException {
 		try (MyConn cnn = new MyConn()) {
-			cnn.prepare("DELETE FROM u_auto_login WHERE remote_addr=?")
-					.setString(1, remoteAddr).execute();
+			cnn.prepare(
+					"DELETE FROM u_auto_login WHERE remote_addr=? AND cookie_value=?")
+					.setString(1, remoteAddr).setString(2, cookieValue)
+					.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -143,7 +146,7 @@ public class LoginManager {
 
 	private static void saveCookieToDB(String remoteAddr, String value,
 			int userId) throws SQLException {
-		deleteCookieFromDB(remoteAddr);
+		deleteCookieFromDB(remoteAddr, value);
 		try (MyConn cnn = new MyConn()) {
 			String query = "INSERT INTO u_auto_login(remote_addr,cookie_value,user_id)"
 					+ " VALUES(?,?,?)";
