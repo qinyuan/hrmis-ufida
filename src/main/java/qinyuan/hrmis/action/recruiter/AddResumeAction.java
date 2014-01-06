@@ -54,9 +54,10 @@ public class AddResumeAction extends SimpleAction {
 		int sourceId = parseInt(sourceIdStr);
 
 		String experienceStr = getString("experience");
-		if (!numeric(experienceStr))
-			return;
-		double experience = parseDouble(experienceStr);
+		Double experience = null;
+		if (numeric(experienceStr)) {
+			experience = Double.valueOf(experienceStr);
+		}
 
 		String applicant = getString("applicant");
 		if (empty(applicant)) {
@@ -106,5 +107,8 @@ public class AddResumeAction extends SimpleAction {
 				other, content, intentionRed, targetPlaceId, downloaded,
 				genderId);
 		setResult(SUCCESS);
+	}
+	
+	public static void main(String[] args) {
 	}
 }

@@ -35,6 +35,8 @@ public class TableRow extends BodyElement {
 		for (Object obj : objs) {
 			if (obj == null) {
 				add(new TableData(isHead).setText(""));
+			} else if (obj instanceof TableData) {
+				add((TableData) obj);
 			} else {
 				add(new TableData(isHead).setText(obj.toString()));
 			}
@@ -43,6 +45,15 @@ public class TableRow extends BodyElement {
 	}
 
 	public TableRow append(Object... objs) {
+		for (Object obj : objs) {
+			if (obj == null) {
+				append(new TableData(isHead).setText(""));
+			} else if (obj instanceof TableData) {
+				append((TableData) obj);
+			} else {
+				append(new TableData(isHead).setText(obj.toString()));
+			}
+		}
 		for (int i = objs.length - 1; i >= 0; i--) {
 			if (objs[i] != null) {
 				append(new TableData(isHead).setText(objs[i].toString()));

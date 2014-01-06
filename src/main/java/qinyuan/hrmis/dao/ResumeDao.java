@@ -73,7 +73,7 @@ public class ResumeDao {
 	public static void add(int userId, String applicant, String company,
 			int postId, String tel, String email, String qq, String resumeNo,
 			String resumeLink, int sourceId, String intention,
-			double experience, String expectSalary, String jhReason,
+			Double experience, String expectSalary, String jhReason,
 			String education, String skill, String prevJob, String prevProj,
 			String other, String content, boolean intentionRed,
 			int targetPlaceId, boolean downloaded, int genderId)
@@ -128,10 +128,10 @@ public class ResumeDao {
 		}
 	}
 
-	public static void mdf(int resumeId,/* String addTime, */String applicant,
-			String company, int postId, String tel, String email, String qq,
-			String resumeNo, String resumeLink, int sourceId, String intention,
-			double experience, String expectSalary, String jhReason,
+	public static void mdf(int resumeId, String applicant, String company,
+			int postId, String tel, String email, String qq, String resumeNo,
+			String resumeLink, int sourceId, String intention,
+			Double experience, String expectSalary, String jhReason,
 			String education, String skill, String prevJob, String prevProj,
 			String other, boolean intentionRed, int targetPlaceId,
 			boolean downloaded, int genderId) throws SQLException {
@@ -157,9 +157,6 @@ public class ResumeDao {
 		r.setPrevProj(prevProj);
 		r.setOther(other);
 		r.setIntentionRed(intentionRed);
-		/*
-		 * r.setAddTime(addTime);
-		 */
 		r.setIntentionRed(intentionRed);
 		r.setTargetPlace(TargetPlaceDao.getInstance(targetPlaceId));
 		r.setDownloaded(downloaded);

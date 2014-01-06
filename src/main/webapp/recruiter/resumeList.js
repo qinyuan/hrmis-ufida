@@ -1,3 +1,13 @@
+var validateResumeInput=function() {
+	var $experience = $('#m_experience');
+	var experience = $experience.val();
+	if (experience != "" && (!numeric(experience))) {
+		alert("工作年限应为数字格式");
+		$experience.select();
+		return false;
+	}
+	return true;
+};
 $(document).ready(function() {
 	var ic = new InputCurtain();
 	ic.add("hiddenDiv");
@@ -5,25 +15,23 @@ $(document).ready(function() {
 	$('#addResumeButton').click(function(){
 		location.href="add.jsp";
 	});
-	$('#resumeMdfCancel').click(function(e){
-		e.preventDefault();
+	$('#resumeMdfCancel').aclick(function(){
 		getContentMdfDiv().empty();
 		getDetailMdfDiv().empty();
 		CURTAIN.hide();
 	});
-	$('#resumeMdfOk').click(function(e){
-		e.preventDefault();
-		submitForm("resumeMdfForm");
+	$('#resumeMdfOk').aclick(function(){
+		if(validateResumeInput()){
+			submitForm("resumeMdfForm");
+		}
 	});
 	$('#resumeInfoButton').hide();
-	$('#resumeContentButton').click(function(e){
-		e.preventDefault();
+	$('#resumeContentButton').aclick(function(){
 		$('#resumeInfoButton').show();
 		mdfResumeContent($('#m_resumeId').val());
 		$(this).hide();
 	});
-	$('#resumeInfoButton').click(function(e){
-		e.preventDefault();
+	$('#resumeInfoButton').aclick(function(){
 		$('#resumeContentButton').show();
 		mdfResume($('#resumeContentId').val());
 		$(this).hide();

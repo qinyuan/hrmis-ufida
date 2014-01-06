@@ -68,13 +68,13 @@ var postSearchResumeNo = function(resumeNo, callBack) {
 				$telSearchTableDiv.html(data);
 				decorateTable($('#resumeNoSearchTableDiv'), true);
 				CURTAIN.show("resumeNoSearchDiv");
-				if(callBack){
+				if (callBack) {
 					callBack(true);
 				}
 			} else if (data.length > 0) {
 				alert(data);
 			} else {
-				if(callBack){
+				if (callBack) {
 					callBack(false);
 				}
 			}
@@ -83,15 +83,15 @@ var postSearchResumeNo = function(resumeNo, callBack) {
 };
 var searchResumeNoAction = function() {
 	var searchResumeNo = $('#searchResumeNoText').val();
-	var $searchRepeatResultDiv=$('#searchRepeatResultDiv');
-	if($.trim(searchResumeNo)==''){
+	var $searchRepeatResultDiv = $('#searchRepeatResultDiv');
+	if ($.trim(searchResumeNo) == '') {
 		$searchRepeatResultDiv.html('未输入');
 		return;
 	}
 	postSearchResumeNo(searchResumeNo, function(repeat) {
 		if (!repeat) {
 			$searchRepeatResultDiv.html('编号未被录入');
-		}else{
+		} else {
 			$searchRepeatResultDiv.html('&nbsp;');
 		}
 	});
@@ -131,11 +131,7 @@ var addSubmitAction = function() {
 
 		var $experience = $('#experience');
 		var experience = $experience.val();
-		if ($.trim(experience) == "") {
-			alert("工作年限未填写");
-			$experience.focus();
-			return false;
-		} else if (!numeric(experience)) {
+		if (experience != "" && (!numeric(experience))) {
 			alert("工作年限应为数字格式");
 			$experience.select();
 			return false;
@@ -143,9 +139,9 @@ var addSubmitAction = function() {
 
 		var $resumeNo = $('#resumeNo');
 		var resumeNo = $.trim($resumeNo.val());
-		var sourceId=$('#sourceId').val();
+		var sourceId = $('#sourceId').val();
 		// 2 and 3 represent 51job and hr.zhaopin
-		if (resumeNo == "" && (sourceId==2 || sourceId==3)) {
+		if (resumeNo == "" && (sourceId == 2 || sourceId == 3)) {
 			alert("简历编号未填写(前程无忧与智联招聘均要求填写简历编号)");
 			$resumeNo.focus();
 			return false;

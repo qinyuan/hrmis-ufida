@@ -9,9 +9,22 @@ import qinyuan.lib.web.html.TableRow;
 public class ResumeDetailTable {
 
 	private int resumeId;
+	private Table table;
 
 	public ResumeDetailTable(int resumeId) {
 		this.resumeId = resumeId;
+	}
+
+	private void addRow(Object col1, Object col2, Object col3, Object col4) {
+		TableRow tr = new TableRow();
+		tr.add(col1, col2, col3, col4);
+		table.add(tr);
+	}
+
+	private void addRow(Object col1, Object col2) {
+		TableRow tr = new TableRow();
+		tr.add(col1, getMultiTd(col2.toString()));
+		table.add(tr);
 	}
 
 	@Override
@@ -20,75 +33,26 @@ public class ResumeDetailTable {
 		if (r == null)
 			return "";
 
-		Table table = new Table();
+		table = new Table();
 
-		TableRow tr = new TableRow();
-		tr.add("姓名", r.getApplicant(), "性别", r.getGenderName());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("创建时间", r.getAddTime(), "修改时间", r.getMdfTime());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("创建者", r.getCreatorName(), "公司", r.getCompany());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("电话", r.getTel(), "Email", r.getEmail());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("简历来源", r.getSourceName(), "是否被下载", r.getDownloaded() ? "是"
+		addRow("姓名", r.getApplicant(), "性别", r.getGenderName());
+		addRow("创建时间", r.getAddTime(), "修改时间", r.getMdfTime());
+		addRow("创建者", r.getCreatorName(), "公司", r.getCompany());
+		addRow("电话", r.getTel(), "Email", r.getEmail());
+		addRow("简历来源", r.getSourceName(), "是否被下载", r.getDownloaded() ? "是"
 				: "否");
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("简历链接", getResumeLinkAnchor(r.getResumeLink()), "简历编号",
+		addRow("简历链接", getResumeLinkAnchor(r.getResumeLink()), "简历编号",
 				r.getResumeNo());
-		table.add(tr);
+		addRow("职位", r.getPostName(), "目标地点", r.getTargetPlaceName());
+		addRow("工作年限", r.getExperience(), "期望薪资", r.getExpectSalary());
+		addRow("QQ", r.getQq(), "意向", r.getIntentionSpan());
 
-		tr = new TableRow();
-		tr.add("职位", r.getPostName(), "目标地点", r.getTargetPlaceName());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("工作年限", r.getExperience(), "期望薪资", r.getExpectSalary());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("QQ", r.getQq(), "意向", r.getIntentionSpan());
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("离职原因");
-		tr.add(getMultiTd(r.getJhReason()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("教育情况");
-		tr.add(getMultiTd(r.getEducation()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("技术能力");
-		tr.add(getMultiTd(r.getSkill()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("工作经历");
-		tr.add(getMultiTd(r.getPrevJob()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("项目经验");
-		tr.add(getMultiTd(r.getPrevProj()));
-		table.add(tr);
-
-		tr = new TableRow();
-		tr.add("备注");
-		tr.add(getMultiTd(r.getOther()));
-		table.add(tr);
+		addRow("离职原因", r.getJhReason());
+		addRow("教育情况", r.getEducation());
+		addRow("技术能力", r.getSkill());
+		addRow("工作经历", r.getPrevJob());
+		addRow("项目经验", r.getPrevProj());
+		addRow("备注", r.getOther());
 
 		return table.toString();
 	}

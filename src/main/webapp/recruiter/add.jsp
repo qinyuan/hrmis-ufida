@@ -71,7 +71,7 @@
 							</tr>
 							<tr>
 								<td>工作年限</td>
-								<td><q:text id="experience" /><span>*</span></td>
+								<td><q:text id="experience" /></td>
 								<td class="split"></td>
 								<td>期望薪资</td>
 								<td><q:text id="expectSalary" /></td>

@@ -34,6 +34,6 @@ public class Text extends EmptyForm {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Text().setId("testid").setValue("testvalue"));
+		System.out.println(new Text().setId("testid").setValue(null));
 	}
 }

@@ -1,23 +1,21 @@
 package qinyuan.hrmis.action.recruiter;
 
 import java.sql.SQLException;
-
 import qinyuan.hrmis.dao.ResumeDao;
 import qinyuan.hrmis.domain.data.HRMIS;
 import qinyuan.lib.date.MyDateTime;
-import qinyuan.lib.web.MyAction;
+import qinyuan.lib.web.SimpleAction;
 
-public class MyResumeAction extends MyAction {
+public class MyResumeAction extends SimpleAction {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String execute() {
+	public void exec() {
 		delete();
 		modify();
 		modifyContent();
 		modifyRecStepDealTime();
-		return BLANK_AJAX_INFO;
 	}
 
 	private void modifyRecStepDealTime() {
@@ -29,7 +27,7 @@ public class MyResumeAction extends MyAction {
 						+ mdfRecStepDealTime + "' WHERE rec_step_id="
 						+ mdfRecStepId);
 			} catch (SQLException e) {
-				setResult(DB_ERROR);
+				printDBError();
 				e.printStackTrace();
 			}
 		}
@@ -42,7 +40,7 @@ public class MyResumeAction extends MyAction {
 			try {
 				ResumeDao.mdfContent(resumeContentId, content);
 			} catch (Exception e) {
-				setResult(DB_ERROR);
+				printDBError();
 				e.printStackTrace();
 			}
 		}
@@ -54,13 +52,6 @@ public class MyResumeAction extends MyAction {
 			return;
 
 		String applicant = getString("m_applicant");
-
-		/*
-		String addTime = getString("m_addTime");
-		if (!MyDateTime.isDateTime(addTime))
-			return;
-			*/
-
 		String company = getString("m_company");
 
 		int postId = getInt("m_postId");
@@ -79,9 +70,10 @@ public class MyResumeAction extends MyAction {
 		String resumeLink = getString("m_resumeLink");
 
 		String experienceStr = getString("m_experience");
-		if (!numeric(experienceStr))
-			return;
-		double experience = Double.parseDouble(experienceStr);
+		Double experience = null;
+		if (numeric(experienceStr)) {
+			experience = Double.valueOf(experienceStr);
+		}
 
 		String expectSalary = getString("m_expectSalary");
 		String intention = getString("m_intention");
@@ -113,14 +105,14 @@ public class MyResumeAction extends MyAction {
 		}
 
 		try {
-			ResumeDao.mdf(resumeId,/* addTime, */applicant, company, postId, tel,
-					email, qq, resumeNo, resumeLink, sourceId, intention,
+			ResumeDao.mdf(resumeId,/* addTime, */applicant, company, postId,
+					tel, email, qq, resumeNo, resumeLink, sourceId, intention,
 					experience, expectSalary, jhReason, education, skill,
 					prevJob, prevProj, other, intentionRed, targetPlaceId,
 					downloaded, genderId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResult(DB_ERROR);
+			printDBError();
 		}
 	}
 
@@ -135,7 +127,7 @@ public class MyResumeAction extends MyAction {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				setResult(DB_ERROR);
+				printDBError();
 			}
 		}
 	}

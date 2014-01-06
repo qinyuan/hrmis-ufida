@@ -19,7 +19,7 @@ public class Resume {
 	private String resumeLink;
 	private SimpleSource source;
 	private String intention;
-	private double experience;
+	private Double experience;
 	private String expectSalary;
 	private String jhReason;
 	private String education;
@@ -105,7 +105,7 @@ public class Resume {
 	}
 
 	public void setCompany(String company) {
-		this.company = company;
+		this.company = getStr(company, 200);
 	}
 
 	public String getApplicant() {
@@ -113,7 +113,7 @@ public class Resume {
 	}
 
 	public void setApplicant(String applicant) {
-		this.applicant = applicant;
+		this.applicant = getStr(applicant, 10);
 	}
 
 	public Post getPost() {
@@ -129,7 +129,7 @@ public class Resume {
 	}
 
 	public void setTel(String tel) {
-		this.tel = tel;
+		this.tel = getStr(tel, 50);
 	}
 
 	public String getEmail() {
@@ -137,7 +137,7 @@ public class Resume {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = getStr(email, 100);
 	}
 
 	public String getQq() {
@@ -145,7 +145,7 @@ public class Resume {
 	}
 
 	public void setQq(String qq) {
-		this.qq = qq;
+		this.qq = getStr(qq, 20);
 	}
 
 	public String getResumeNo() {
@@ -153,7 +153,7 @@ public class Resume {
 	}
 
 	public void setResumeNo(String resumeNo) {
-		this.resumeNo = resumeNo;
+		this.resumeNo = getStr(resumeNo, 50);
 	}
 
 	public String getResumeLink() {
@@ -161,7 +161,7 @@ public class Resume {
 	}
 
 	public void setResumeLink(String resumeLink) {
-		this.resumeLink = resumeLink;
+		this.resumeLink = getStr(resumeLink, 200);
 	}
 
 	public SimpleSource getSource() {
@@ -177,14 +177,14 @@ public class Resume {
 	}
 
 	public void setIntention(String intention) {
-		this.intention = intention;
+		this.intention = getStr(intention, 200);
 	}
 
-	public double getExperience() {
+	public Double getExperience() {
 		return experience;
 	}
 
-	public void setExperience(double experience) {
+	public void setExperience(Double experience) {
 		this.experience = experience;
 	}
 
@@ -193,7 +193,7 @@ public class Resume {
 	}
 
 	public void setExpectSalary(String expectSalary) {
-		this.expectSalary = expectSalary;
+		this.expectSalary = getStr(expectSalary, 50);
 	}
 
 	public String getJhReason() {
@@ -201,7 +201,7 @@ public class Resume {
 	}
 
 	public void setJhReason(String jhReason) {
-		this.jhReason = jhReason;
+		this.jhReason = getStr(jhReason, 5000);
 	}
 
 	public String getEducation() {
@@ -209,7 +209,7 @@ public class Resume {
 	}
 
 	public void setEducation(String education) {
-		this.education = education;
+		this.education = getStr(education, 1000);
 	}
 
 	public String getSkill() {
@@ -217,7 +217,7 @@ public class Resume {
 	}
 
 	public void setSkill(String skill) {
-		this.skill = skill;
+		this.skill = getStr(skill, 5000);
 	}
 
 	public String getPrevJob() {
@@ -241,7 +241,7 @@ public class Resume {
 	}
 
 	public void setOther(String other) {
-		this.other = other;
+		this.other = getStr(other, 5000);
 	}
 
 	public String getContent() {
@@ -320,4 +320,14 @@ public class Resume {
 		return gender.getName();
 	}
 
+	private String getStr(String str, int len) {
+		if (str == null) {
+			return null;
+		} else {
+			if (len > str.length()) {
+				len = str.length();
+			}
+			return str.substring(0, len);
+		}
+	}
 }
