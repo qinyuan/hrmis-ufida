@@ -127,10 +127,7 @@ public class ResumeModifyTable {
 	}
 
 	private Text getExperience() {
-		Double experience = r.getExperience();
-		String experienceStr = r.getExperience() == null ? "" : String
-				.valueOf(experience);
-		return new Text().setId("m_experience").setValue(experienceStr);
+		return new Text().setId("m_experience").setValue(r.getExperienceStr());
 	}
 
 	private Text getExpectSalary() {

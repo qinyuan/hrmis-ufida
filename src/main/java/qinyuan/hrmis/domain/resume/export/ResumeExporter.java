@@ -160,7 +160,7 @@ public class ResumeExporter {
 		} else {
 			ru.add(r.getIntention());
 		}
-		ru.add(String.valueOf(r.getExperience()).replace(".0", ""));
+		ru.add(r.getExperienceStr());
 		ru.add(r.getExpectSalary());
 		ru.add(r.getOther());
 		if (style != null) {

@@ -184,6 +184,11 @@ public class Resume {
 		return experience;
 	}
 
+	public String getExperienceStr() {
+		return experience == null ? "" : String.valueOf(experience).replace(
+				".0", "");
+	}
+
 	public void setExperience(Double experience) {
 		this.experience = experience;
 	}

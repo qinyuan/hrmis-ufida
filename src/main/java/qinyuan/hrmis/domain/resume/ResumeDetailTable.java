@@ -44,7 +44,7 @@ public class ResumeDetailTable {
 		addRow("简历链接", getResumeLinkAnchor(r.getResumeLink()), "简历编号",
 				r.getResumeNo());
 		addRow("职位", r.getPostName(), "目标地点", r.getTargetPlaceName());
-		addRow("工作年限", r.getExperience(), "期望薪资", r.getExpectSalary());
+		addRow("工作年限", r.getExperienceStr(), "期望薪资", r.getExpectSalary());
 		addRow("QQ", r.getQq(), "意向", r.getIntentionSpan());
 
 		addRow("离职原因", r.getJhReason());

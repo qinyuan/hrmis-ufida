@@ -52,8 +52,7 @@ public class ResumeDetailExporter {
 	}
 
 	private static String getExperience(Resume r) {
-		Double experience = r.getExperience();
-		String str = experience == null ? "" : String.valueOf(experience);
+		String str = r.getExperienceStr();
 		if (str.length() > 0) {
 			str = str.replace(".0", "") + "年";
 		}
