@@ -2,23 +2,45 @@ package qinyuan.lib.db;
 
 import java.lang.reflect.Array;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class HConn implements AutoCloseable {
-
+	private static long LAST_CONNECT_TIME;
 	private Session sess;
 	private Transaction trans;
 
 	public HConn() {
-		int i = 0;
-		while ((sess == null || trans == null) && (++i < 10)) {
+		sess = HibernateUtil.getSession();
+		trans = sess.beginTransaction();
+		testConnection();
+	}
+
+	private void testConnection() {
+		long connectTime = System.currentTimeMillis();
+		long timeDiff = connectTime - LAST_CONNECT_TIME;
+		if (timeDiff >= Config.getWaitTimeOut()) {
+			LAST_CONNECT_TIME = connectTime;
+			while (true) {
+				try {
+					sess.createSQLQuery("SELECT 1").list();
+					break;
+				} catch (Exception e) {
+					sess = HibernateUtil.getSession();
+					trans = sess.beginTransaction();
+				}
+			}
+		}
+		if (!Config.isUpdated()) {
 			try {
-				sess = HibernateUtil.getSession();
-				trans = sess.beginTransaction();
+				List<?> list = sess.createSQLQuery(
+						"show global variables like 'wait_timeout'").list();
+				Object[] objects = (Object[]) list.get(0);
+				int waitTimeOut = Integer.parseInt((String) objects[1]);
+				Config.setWaitTimeOut(waitTimeOut);
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 	}

@@ -5,10 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import qinyuan.lib.file.FileUtil;
 
 public abstract class DBConn implements AutoCloseable {
+
+	private static long LAST_CONNECT_TIME;
 
 	private Connection cnn;
 	private ResultSet rs;
@@ -17,6 +18,36 @@ public abstract class DBConn implements AutoCloseable {
 
 	public DBConn() throws SQLException {
 		cnn = getDataSource().getConnection();
+		testConnection();
+	}
+
+	private void testConnection() {
+		long connectTime = System.currentTimeMillis();
+		long timeDiff = connectTime - LAST_CONNECT_TIME;
+		if (timeDiff >= Config.getWaitTimeOut()) {
+			LAST_CONNECT_TIME = connectTime;
+			while (true) {
+				try {
+					cnn.createStatement().executeQuery("select 1");
+					break;
+				} catch (Exception e) {
+					try {
+						cnn = getDataSource().getConnection();
+					} catch (Exception e1) {
+					}
+				}
+			}
+		}
+		if (!Config.isUpdated()) {
+			try {
+				ResultSet localResultSet = cnn.createStatement().executeQuery(
+						"show global variables like 'wait_timeout'");
+				localResultSet.next();
+				int waitTimeOut = localResultSet.getInt(2);
+				Config.setWaitTimeOut(waitTimeOut);
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	protected abstract DataSource getDataSource();

@@ -1,18 +1,14 @@
 package qinyuan.hrmis.dao;
 
-import java.util.List;
 import qinyuan.hrmis.domain.data.HRMIS;
 import qinyuan.lib.db.HConn;
 
 public class PostDao {
 
 	public static Post[] getInstances() {
-		List<Post> list = HConn.getOneList("FROM Post", Post.class);
-		Post[] posts = new Post[list.size()];
-		list.toArray(posts);
-		return posts;
+		return HConn.getOneArray("FROM Post", Post.class);
 	}
-	
+
 	public static Post getInstance(int postId) {
 		return HConn.getOne(Post.class, postId);
 	}

@@ -15,7 +15,7 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">false</property>
 		<property name="current_session_context_class">thread</property>
-
+		
 		<mapping resource="qinyuan/hrmis/dao/TargetPlace.hbm.xml"/>
 		<mapping resource="qinyuan/hrmis/dao/Post.hbm.xml"/>
 		<mapping resource="qinyuan/hrmis/dao/Customer.hbm.xml"/>
