@@ -101,7 +101,7 @@ var resumeModifier = {
 		this.getCKEditor().setData('');
 		this.setContentMdfVisible(false);
 		this.setDetailMdfVisible(false);
-		this.setResumeContentId(resumeId);
+		this.setResumeContentId(null);
 		CURTAIN.hide();
 	},
 	setResumeContentId : function(resumeId) {
