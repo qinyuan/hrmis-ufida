@@ -51,5 +51,5 @@
 		</div>
 	</div>
 </body>
-<q:js src="recruiter/exportExcel" />
+<q:js src="/recruiter/exportExcel" />
 </html>
