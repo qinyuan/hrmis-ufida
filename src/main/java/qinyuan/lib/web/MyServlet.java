@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 import qinyuan.lib.lang.MyMath;
 
 public abstract class MyServlet extends HttpServlet {
@@ -35,7 +35,7 @@ public abstract class MyServlet extends HttpServlet {
 	private boolean ajaxFirstCall;
 
 	static {
-		Map<String, String> map = PFile.parse("/page.properties");
+		Map<String, String> map = PropertyUtil.parse("page");
 		PROJ = map.get("proj");
 		DB_ERROR = map.get("db_error");
 		UNKNOWN_ERROR = map.get("unknown_error");

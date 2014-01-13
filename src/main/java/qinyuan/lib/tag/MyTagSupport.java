@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 
 public class MyTagSupport extends SimpleTagSupport {
 
@@ -13,7 +13,7 @@ public class MyTagSupport extends SimpleTagSupport {
 	private JspWriter out;
 
 	static {
-		WEB_BASE = "/" + PFile.parse("/page.properties").get("proj");
+		WEB_BASE = "/" + PropertyUtil.parse("page").get("proj");
 	}
 
 	protected void print(Object str) throws IOException {

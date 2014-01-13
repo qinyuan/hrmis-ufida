@@ -8,15 +8,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import qinyuan.hrmis.lib.db.MyConn;
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 
 public class Privilege {
 
-	private final static String PROJ = PFile.parse("page").get("proj");
+	private final static String PROJ = PropertyUtil.parse("page").get("proj");
 
 	public final static Map<Integer, Privilege> priMap = new HashMap<Integer, Privilege>();
 	static {
-		for (Entry<String, String> entry : PFile.parse("privilege").entrySet()) {
+		for (Entry<String, String> entry : PropertyUtil.parse("privilege")
+				.entrySet()) {
 			Integer key = Integer.valueOf(entry.getKey());
 			Privilege value = new Privilege(entry.getValue());
 			priMap.put(key, value);
@@ -29,7 +30,7 @@ public class Privilege {
 	private List<String> keyList = new ArrayList<String>();
 
 	Privilege(String filePath) {
-		map = PFile.parse(filePath, keyList);
+		map = PropertyUtil.parse(filePath, keyList);
 		title = map.get("title");
 		base = map.get("base");
 	}

@@ -1,11 +1,11 @@
 package qinyuan.hrmis.domain.tool;
 
 import java.util.Map;
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 
 public class SalaryTool {
 
-	private Map<String, String> map = PFile.parse("salary_cal");
+	private Map<String, String> map = PropertyUtil.parse("salary_cal");
 
 	public double getEndowmentRate() {
 		String str = map.get("endowmentRate");

@@ -17,6 +17,7 @@ public class ExportExcel extends MyServlet {
 		String type = getParameter("type");
 		if (type != null) {
 			ResumeExporter re = new ResumeExporter();
+
 			String recruiterIdStr = getParameter("recruiterId");
 			String recruiterName = "";
 			if (numeric(recruiterIdStr)) {
@@ -35,6 +36,13 @@ public class ExportExcel extends MyServlet {
 			if (MyDate.isDate(endDate)) {
 				re.setEndDate(endDate);
 			}
+
+			re.setExportJhReason(hasParameter("jhReason"));
+			re.setExportEducation(hasParameter("education"));
+			re.setExportSkill(hasParameter("skill"));
+			re.setExportPrevJob(hasParameter("prevJob"));
+			re.setExportPrevProj(hasParameter("prevProj"));
+
 			try {
 				String fileName = null;
 				if (type.equals("daily")) {

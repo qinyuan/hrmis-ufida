@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,32 +24,39 @@
 		</div>
 
 		<div id="addResumeDiv">
-			<img alt="添加简历" src="/hrmis/recruiter/toAddPageButton.png" id="addResumeButton">
+			<img alt="添加简历" src="/hrmis/recruiter/toAddPageButton.png"
+				id="addResumeButton">
 		</div>
 
-		<form id="myResumeForm" action="my-resume.action" method="post">
-			<div id="hiddenDiv">
-				<div id="contentDiv"></div>
-				<div id="availableCusDiv">
-					<q:cancel id="availableCusCancel" />
-				</div>
-				<div id="mdfFeedbackDiv">
+		<div id="mdfFeedbackDiv">
+			<form id="myResumeForm" action="my-resume.action" method="post">
+				<textarea id="feedbackText" name="feedbackText" rows="5" cols="50"></textarea>
+				<q:hidden id="feedbackMdfRecommendId" />
+				<p>
 					<q:ok id="mdfFeedbackOk" />
 					<q:cancel id="mdfFeedbackCancel" />
-				</div>
-			</div>
-		</form>
+				</p>
+			</form>
+		</div>
+
+		<div id="recommendDiv">
+			<div id="recommendListDiv"></div>
+			<q:cancel id="recommendCancel" />
+		</div>
 
 		<div id="resumeMdfDiv">
 			<form id="resumeMdfForm" action="my-resume.action" method="post">
 				<div id="resumeDetailMdfDiv"></div>
-				<div id="resumeContentMdfDiv"></div>
+				<div id="resumeContentMdfDiv">
+					<textarea name="editor" id="editor"></textarea>
+					<q:hidden id="resumeContentId" />
+				</div>
 			</form>
 			<p>
 				<q:ok id="resumeMdfOk" />
 				<q:cancel id="resumeMdfCancel" />
 				<q:button text="查看简历内容" id="resumeContentButton" />
-				<q:button text="查看简历信息" id="resumeInfoButton" />
+				<q:button text="查看简历信息" id="resumeDetailButton" />
 			</p>
 		</div>
 

@@ -14,8 +14,6 @@ import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import qinyuan.lib.file.FileUtil;
-
 public class ExcelSheet {
 
 	private HSSFSheet sheet;
@@ -81,6 +79,14 @@ public class ExcelSheet {
 				cell.setCellStyle(cellStyle);
 			}
 		}
+	}
+
+	public void setColumnWidth(int columnIndex, int width) {
+		sheet.setColumnWidth(columnIndex, width);
+	}
+
+	public int getColumnWidth(int columnIndex) {
+		return sheet.getColumnWidth(columnIndex);
 	}
 
 	public void setComment(int rowIndex, int columnIndex, int rows, int cols,
@@ -184,16 +190,5 @@ public class ExcelSheet {
 			row = sheet.createRow(rowIndex);
 		}
 		return row;
-	}
-
-	public static void main(String[] args) {
-		String fileName = "d:/WeeklyReport.xls";
-		ExcelBook book = new ExcelBook(fileName);
-		ExcelSheet sheet = book.getSheet(1);
-		sheet.merge(5, 7, 2, 5, true);
-		sheet.setValue(5, 2, "test");
-		book.close();
-
-		FileUtil.show(fileName);
 	}
 }

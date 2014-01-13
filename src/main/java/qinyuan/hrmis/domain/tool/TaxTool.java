@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-import qinyuan.lib.file.PFile;
+import qinyuan.lib.file.PropertyUtil;
 import qinyuan.lib.lang.MyMath;
 import qinyuan.lib.web.html.Table;
 import qinyuan.lib.web.html.TableRow;
@@ -18,7 +18,7 @@ public class TaxTool {
 	private Map<String, String> map;
 
 	public TaxTool() {
-		map = PFile.parse("tax_rate");
+		map = PropertyUtil.parse("tax_rate");
 		Set<String> set = map.keySet();
 		int len = set.size();
 		taxLevels = getTaxLevelsByKeySet(set);
