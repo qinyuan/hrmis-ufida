@@ -281,11 +281,11 @@ $(function() {
 		openCustomerRemark(this.id.replace(/\D/g, ''));
 		e.stopPropagation();
 	}).css('backgroundColor', 'white');
-	$('#remarkDemand').click(function() {
+	$('#remarkDemand').aclick(function() {
 		if (clickedSpan && clickedSpan.getDemandId())
 			openRemarkDemand(clickedSpan.getDemandId());
 	});
-	$('#remarkCustomer').click(function() {
+	$('#remarkCustomer').aclick(function() {
 		openCustomerRemark(tree.getCusId());
 	});
 	$('#addDemand').aclick(displayAddForm);
