@@ -2,8 +2,6 @@
 <%@page import="qinyuan.hrmis.domain.customer.CustomerTree"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<q:button text="客户信息" id="remarkCustomer" disable="true" />
-<q:button text="需求信息" id="remarkDemand" disable="true" />
 
 <div class="easyui-layout" style="width: 980px; height: 500px;">
 
@@ -24,11 +22,13 @@
 	<div id="rightDiv"
 		data-options="region:'east',split:true,collapsible:false" title="需求明细"
 		style="width: 600px;">
-		<div id="detailDiv"></div>
-		<div id="mdfDiv">
-			<q:ok id="mdfOK" text="修改" />
-			&nbsp;&nbsp;
-			<q:cancel id="mdfCancel" />
-		</div>
+		<form id="mdfForm" method="post" action="demand.action">
+			<div id="detailDiv"></div>
+			<div id="mdfDiv">
+				<q:ok id="mdfOK" text="修改" />
+				&nbsp;&nbsp;
+				<q:cancel id="mdfCancel" />
+			</div>
+		</form>
 	</div>
 </div>

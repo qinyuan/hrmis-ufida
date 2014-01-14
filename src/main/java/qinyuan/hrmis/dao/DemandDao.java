@@ -63,6 +63,17 @@ public class DemandDao {
 		cnn.close();
 	}
 
+	public static void mdfStatus(int demandId, boolean active, boolean pause) {
+		HConn cnn = new HConn();
+		Demand d = cnn.get(Demand.class, demandId);
+		if (d != null) {
+			d.setActive(active);
+			d.setPause(pause);
+			cnn.update(d);
+		}
+		cnn.close();
+	}
+
 	public static void del(int demandId) {
 		if (!isUsed(demandId)) {
 			HConn.deleteOne(Demand.class, demandId);

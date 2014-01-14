@@ -16,15 +16,28 @@
 	<div class="body">
 		<%@include file="/cbody.jsp"%>
 		<div class="main">
-			<q:add id="addCustomer" text="添加客户" />
-			<q:delete id="delCustomer" text="删除客户" disable="true" />
-			<q:edit id="mdfCustomer" text="修改客户" disable="true" />
-			<q:button text="移动客户" id="moveCustomer" disable="true" />
-			<q:add id="addDemand" text="添加需求" disable="true" />
-			<q:delete id="delDemand" text="删除需求" disable="true" />
-			<q:edit text="修改需求" id="mdfDemand" disable="true" />
+			<fieldset>
+				<legend>客户管理</legend>
+				<q:add id="addCustomer" text="" />
+				<q:edit id="mdfCustomer" text="" disable="true" />
+				<q:delete id="delCustomer" text="" disable="true" />
+				<q:button text="移动" id="moveCustomer" disable="true" />
+			</fieldset>
+			<fieldset>
+				<legend>需求管理</legend>
+				<q:add id="addDemand" text="" disable="true" />
+				<q:edit text="" id="mdfDemand" disable="true" />
+				<q:delete id="delDemand" text="" disable="true" />
+				<q:button text="开启" id="openDemand" disable="true" />
+				<q:button text="暂停" id="pauseDemand" disable="true" />
+				<q:button text="关闭" id="closeDemand" disable="true" />
+			</fieldset>
+			<fieldset>
+				<legend>备注</legend>
+				<%@include file="demandCommonButton.jsp"%>
+			</fieldset>
 
-			<%@include file="demand-common.jsp"%>
+			<%@include file="demandCommonContent.jsp"%>
 
 			<div class="input" id="inputDiv">
 				<form id="addForm" action="demand.action" method="post">

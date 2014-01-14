@@ -15,7 +15,8 @@
 	<div class="body">
 		<%@include file="/cbody.jsp"%>
 		<div class="main">
-			<%@include file="/de-admin/demand-common.jsp"%>
+			<%@include file="/de-admin/demandCommonButton.jsp"%>
+			<%@include file="/de-admin/demandCommonContent.jsp"%>
 		</div>
 	</div>
 </body>

@@ -27,7 +27,7 @@ td#duty,td#qualification {
 	font-size: 10pt;
 }
 
-#moveCustomerDiv{
+#moveCustomerDiv {
 	position: absolute;
 	left: 250px;
 	top: 25px;
@@ -37,6 +37,18 @@ td#duty,td#qualification {
 	display: none;
 }
 
-#moveCustomerButtonsDiv{
-	padding: 10px;	
+#moveCustomerButtonsDiv {
+	padding: 10px;
+}
+
+fieldset {
+	position: relative;
+	float: left;
+	border: 1px dotted darkgray;
+	margin: 0;
+}
+
+legend {
+	color: darkgray;
+	font-style: italic;
 }

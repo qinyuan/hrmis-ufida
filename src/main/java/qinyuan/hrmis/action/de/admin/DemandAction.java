@@ -14,6 +14,7 @@ public class DemandAction extends qinyuan.hrmis.action.demand.DemandAction {
 		addDemand();
 		delDemand();
 		mdfDemand();
+		mdfDemandStatus();
 	}
 
 	private void delDemand() {
@@ -76,6 +77,15 @@ public class DemandAction extends qinyuan.hrmis.action.demand.DemandAction {
 				startDate, endDate, ds.getActive(), salary, postNumber,
 				targetPlaceId, ds.getPause());
 		setResult(SUCCESS);
+	}
+
+	private void mdfDemandStatus() {
+		int demandId = getInt("demandId");
+		if (hasParameter("changeDemandStatus") && demandId > 0) {
+			boolean active = "true".equals(getString("active"));
+			boolean pause = "true".equals(getString("pause"));
+			DemandDao.mdfStatus(demandId, active, pause);
+		}
 	}
 
 	private void addDemand() {

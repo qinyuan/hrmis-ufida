@@ -370,7 +370,7 @@ function getCurrentDate() {
 	var year = date.getFullYear();
 	var month = date.getMonth();
 	var day = date.getDate();
-	return year + "-" + month + "-" + day;
+	return year + "-" + (month + 1) + "-" + day;
 }
 function submitForm(formId, url, callback) {
 	if (url == null) {
