@@ -1,6 +1,5 @@
 <%@page import="qinyuan.hrmis.domain.resume.statistics.ResumeStatistics"%>
 <%@page import="qinyuan.hrmis.domain.resume.ResumeModifyTable"%>
-<%@page import="qinyuan.lib.file.PFile"%>
 <%@page import="qinyuan.hrmis.domain.table.SourceMapTable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

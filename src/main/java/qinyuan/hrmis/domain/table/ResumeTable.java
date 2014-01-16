@@ -4,12 +4,16 @@ import static qinyuan.lib.web.html.ImageUtil.getDelImage;
 import static qinyuan.lib.web.html.ImageUtil.getDownArrowImage;
 import static qinyuan.lib.web.html.ImageUtil.getMdfImage;
 import static qinyuan.lib.web.html.ImageUtil.getRightArrowImage;
+
 import java.sql.SQLException;
+
 import qinyuan.hrmis.dao.SimpleDemandDao;
 import qinyuan.hrmis.domain.recommend.Status;
 import qinyuan.hrmis.domain.user.User;
+import qinyuan.hrmis.lib.db.MyConn;
 import qinyuan.hrmis.lib.db.MyDataSource;
 import qinyuan.lib.date.MyDate;
+import qinyuan.lib.date.MyTimeRecord;
 import qinyuan.lib.db.MySQLConn;
 import qinyuan.lib.web.html.TableRow;
 import qinyuan.lib.web.html.pagination.BasePaginatedTable;
@@ -116,11 +120,19 @@ public class ResumeTable extends BasePaginatedTable {
 
 	@Override
 	protected String getQuery() {
-		String recommendSubQuery = "(SELECT *,MAX(recommend_id) "
+		String recommendSubQuery = "(SELECT *,MAX(recommend_id) AS max_recommend_id "
 				+ "FROM rec_recommend GROUP BY resume_id)";
-		String recStepSubQuery = "(SELECT *,Max(status_id) AS max_status_id "
-				+ "FROM rec_rec_step GROUP BY recommend_id)";
-		String s = "SELECT * FROM rec_resume AS r "
+		String recStepSubQuery = "(SELECT *,Max(status_id) AS max_status_id,MIN(deal_time) AS min_deal_time "
+				+ "FROM rec_rec_step WHERE status_id>="
+				+ status
+				+ " GROUP BY recommend_id)";
+		String fields = "r.resume_id,add_time,mdf_time,u1.name,p.name,"
+				+ "tp.target_place_id,tp.name,tel,intention,intention_red,"
+				+ "expect_salary,d.demand_id,s.status_id,rm.recommend_id,applicant,"
+				+ "r.creator_id";
+		String s = "SELECT "
+				+ fields
+				+ " FROM rec_resume AS r "
 				+ "LEFT JOIN u_user AS u1 ON r.creator_id=u1.user_id "
 				+ "LEFT JOIN u_user AS u2 ON r.tracer_id=u2.user_id "
 				+ "LEFT JOIN rec_post AS p ON r.post_id=p.post_id "
@@ -134,6 +146,7 @@ public class ResumeTable extends BasePaginatedTable {
 				+ "LEFT JOIN rec_status AS s ON rs.max_status_id=s.status_id "
 				+ "LEFT JOIN rec_target_place AS tp ON tp.target_place_id=r.target_place_id ";
 		s = s + getWhereClause() + " ORDER BY add_time DESC";
+		System.out.println(s);
 		return s;
 	}
 
@@ -185,15 +198,16 @@ public class ResumeTable extends BasePaginatedTable {
 			}
 		} else {
 			s = getWherePrefix(s);
-			String ss = "(r.resume_id IN (SELECT resume_id FROM rec_recommend "
-					+ "WHERE recommend_id IN (SELECT recommend_id FROM rec_rec_step "
-					+ "WHERE status_id=" + status;
-			if (startHandleDate != null)
-				ss += " AND DATE(deal_time)>='" + startHandleDate + "'";
-			if (endHandleDate != null)
-				ss += " AND DATE(deal_time)<='" + endHandleDate + "'";
-			ss += ")))";
-			s += ss;
+			s += "max_status_id>=" + status;
+
+			if (startHandleDate != null) {
+				s = getWherePrefix(s);
+				s += "DATE(min_deal_time)>='" + startHandleDate + "'";
+			}
+			if (endHandleDate != null) {
+				s = getWherePrefix(s);
+				s += "DATE(min_deal_time)<='" + endHandleDate + "'";
+			}
 		}
 		return s;
 	}
@@ -286,5 +300,14 @@ public class ResumeTable extends BasePaginatedTable {
 	@Override
 	protected String getTitle() {
 		return "简历列表";
+	}
+
+	public static void main(String[] args) throws SQLException {
+		MyConn cnn = new MyConn();
+		cnn.close();
+		MyTimeRecord record = new MyTimeRecord();
+		ResumeTable r = new ResumeTable();
+		r.toString();
+		record.print("end");
 	}
 }
