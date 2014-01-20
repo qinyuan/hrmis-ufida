@@ -91,14 +91,14 @@ public class ResumeCount {
 		s.append("<a target='_blank' href='resumeList.jsp?useSessionParam=false&");
 		if (startDate != null) {
 			if (statusId == 0) {
-				s.append("resumeStartAddDate=" + startDate + "&");
+				s.append("startAddDate=" + startDate + "&");
 			} else {
 				s.append("startHandleDate=" + startDate + "&");
 			}
 		}
 		if (endDate != null) {
 			if (statusId == 0) {
-				s.append("resumeEndAddDate=" + endDate + "&");
+				s.append("endAddDate=" + endDate + "&");
 			} else {
 				s.append("endHandleDate=" + endDate + "&");
 			}
@@ -107,7 +107,7 @@ public class ResumeCount {
 			s.append("recruiterId=" + userId + "&");
 		if (postId > 0)
 			s.append("postId=" + postId + "&");
-		s.append("sessResumeStatusId=" + statusId + "'>" + count + "</a>");
+		s.append("statusId=" + statusId + "'>" + count + "</a>");
 		return s.toString();
 	}
 
