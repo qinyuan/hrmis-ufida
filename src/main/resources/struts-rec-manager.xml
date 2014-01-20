@@ -5,6 +5,9 @@
 <struts>
 
 	<package name="recManager" namespace="/rec-manager" extends="recruiter">
+		<action name="ResumeFilter" class="qinyuan.hrmis.action.recruiter.ResumeFilterAction" />
+
+		<action name="*" class="qinyuan.hrmis.action.rec.manager.{1}Action" />
 	</package>
 	
 </struts>

@@ -9,6 +9,9 @@
 		<action name="demand" class="qinyuan.hrmis.action.de.admin.DemandAction" />
 		<action name="customer-remark" class="qinyuan.hrmis.action.de.admin.CustomerRemarkAction" />
 		<action name="demand-remark" class="qinyuan.hrmis.action.de.admin.DemandRemarkAction" />
+
+		<action name="ResumeFilter" class="qinyuan.hrmis.action.recruiter.ResumeFilterAction" />
+
 		<action name="*" class="qinyuan.hrmis.action.de.admin.{1}Action" />
 	</package>
 </struts>

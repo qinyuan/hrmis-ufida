@@ -1,3 +1,6 @@
+<%@page import="qinyuan.hrmis.domain.table.ResumeTable"%>
+<%@page import="qinyuan.lib.web.html.pagination.PaginatedTableUtil"%>
+<%@page import="qinyuan.hrmis.domain.resume.ResumeFilter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,11 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>简历列表</title>
 <%@include file="/chead.jsp"%>
-<q:css href="/recruiter/resumeList" />
-<q:js src="/lib/showResult" />
-<q:js src="/lib/inputCurtain" />
-<q:js src="/lib/ckeditor/ckeditor.js" />
-<q:js src="/recruiter/resumeList" />
+<%@include file="resumeListHead.jsp"%>
 </head>
 <body>
 	<div class="body">
@@ -18,7 +17,7 @@
 
 		<div class="main">
 			<div id="filterDiv">
-				<%@include file="resume-filter.jsp"%>
+				<%@include file="resumeFilter.jsp"%>
 			</div>
 			<%=table.setUser(user)%>
 		</div>

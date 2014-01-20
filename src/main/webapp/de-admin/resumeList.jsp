@@ -6,11 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>简历列表</title>
 <%@include file="/chead.jsp"%>
-<q:css href="/recruiter/resumeList" />
-<q:js src="/lib/showResult" />
-<q:js src="/lib/inputCurtain" />
-<q:js src="/lib/ckeditor/ckeditor.js" />
-<q:js src="/recruiter/resumeList" />
+<%@include file="/recruiter/resumeListHead.jsp"%>
 </head>
 <body>
 	<div class="body">
@@ -18,7 +14,7 @@
 
 		<div class="main">
 			<div id="filterDiv">
-				<%@include file="/recruiter/resume-filter.jsp"%>
+				<%@include file="/recruiter/resumeFilter.jsp"%>
 			</div>
 			<%=table.setEditable(false)%>
 		</div>

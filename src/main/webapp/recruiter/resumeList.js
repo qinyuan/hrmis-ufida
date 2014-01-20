@@ -302,7 +302,9 @@ $(document).ready(function() {
 	$('#mdfRecStepDealTimeOk').aclick(function() {
 		submitForm("mdfRecStepDealTimeForm");
 	});
-	CKEDITOR.replace('editor', {
-		height : 450,
-	});
+	if ($('#editor').size() > 0) {
+		CKEDITOR.replace('editor', {
+			height : 450,
+		});
+	}
 });

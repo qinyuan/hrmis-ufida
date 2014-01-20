@@ -436,3 +436,72 @@ CURTAIN.show = function(id) {
 		});
 	}
 };
+function Href() {
+	this.site = 'http://' + location.host + location.pathname;
+	this.params = createParamsByStr(location.search);
+	this.anchor = location.hash;
+
+	function createParamsByStr(str) {
+		if (!str) {
+			return {};
+		}
+
+		var obj = {};
+		str = str.replace('?', '');
+		var strArr = str.split('&');
+		for ( var i in strArr) {
+			if (strArr[i]) {
+				var pair = strArr[i].split('=');
+				obj[pair[0]] = pair[1];
+			}
+		}
+		return obj;
+	}
+}
+Href.prototype.addParam = function(obj) {
+	if (typeof obj != 'object') {
+		return;
+	}
+
+	for ( var key in obj) {
+		var value = obj[key];
+		if (value) {
+			this.params[key] = value;
+		}
+	}
+	return this;
+};
+Href.prototype.toString = function() {
+	var str = this.site;
+	var first = true;
+	for ( var key in this.params) {
+		if (first) {
+			str += '?';
+			first = false;
+		} else {
+			str += '&';
+		}
+		str += key + '=' + this.params[key];
+	}
+	if (this.anchor) {
+		str += this.anchor;
+	}
+	return encodeURI(str);
+};
+function FilterPost() {
+	this.href = location.href.toString().replace('.jsp', '.action');
+}
+FilterPost.prototype.setHref = function(href) {
+	this.href = href;
+	return this;
+};
+FilterPost.prototype.post = function(paramObj) {
+	var href = location.href.toString();
+	if (href.indexOf('useSessionParam=false') >= 0) {
+		href = new Href();
+		href.addParam(paramObj);
+		location.href = href.toString();
+	} else {
+		$.post(this.href, paramObj, ajaxCallBack);
+	}
+};

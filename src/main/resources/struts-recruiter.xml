@@ -17,5 +17,6 @@
 		<action name="prev-step" class="qinyuan.hrmis.action.recruiter.PrevStepAction" />
 		<action name="recommend" class="qinyuan.hrmis.action.recruiter.RecommendAction" />
 		<action name="recommend-table" class="qinyuan.hrmis.action.recruiter.RecommendTableAction" />
+		<action name="*" class="qinyuan.hrmis.action.recruiter.{1}Action" />
 	</package>
 </struts>

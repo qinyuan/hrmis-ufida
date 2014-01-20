@@ -5,22 +5,69 @@ import javax.servlet.http.HttpSession;
 
 public class SessParam {
 
-	private static boolean useSessionParam(HttpServletRequest request) {
+	private HttpServletRequest request;
+	private HttpSession session;
+	private boolean useSessionParam;
+	private String keyPrefix = "";
+
+	public SessParam(HttpServletRequest request) {
+		this.request = request;
+		this.session = request.getSession();
 		String str = request.getParameter("useSessionParam");
 		if (str != null && str.toLowerCase().equals("false")) {
-			return false;
+			useSessionParam = false;
 		} else {
-			return true;
+			useSessionParam = true;
 		}
 	}
 
-	public static Integer getInt(HttpServletRequest request, String key) {
+	public void setPrefix(String keyPrefix) {
+		if (keyPrefix == null) {
+			this.keyPrefix = "";
+		} else {
+			this.keyPrefix = keyPrefix;
+		}
+	}
+
+	private String getFullKey(String key) {
+		if (keyPrefix.isEmpty()) {
+			return key;
+		} else {
+			return keyPrefix + "_" + key;
+		}
+	}
+
+	public boolean hasKey(String key) {
+		return request.getParameter(key) != null
+				|| session.getAttribute(getFullKey(key)) != null;
+	}
+
+	public String getStr(String key) {
+		String value = request.getParameter(key);
+		if (value == null) {
+			if (useSessionParam) {
+				value = (String) session.getAttribute(getFullKey(key));
+				return value == null ? "" : value;
+			} else {
+				return "";
+			}
+		} else {
+			return value;
+		}
+	}
+
+	public Integer getInt(String key) {
 		String str = request.getParameter(key);
 		if (str == null) {
-			if (useSessionParam(request)) {
-				HttpSession session = request.getSession();
-				Integer value = (Integer) session.getAttribute(key);
-				return value == null ? 0 : value;
+			if (useSessionParam) {
+				Object value = session.getAttribute(getFullKey(key));
+				if (value == null) {
+					return 0;
+				} else if (value instanceof Integer) {
+					return (Integer) value;
+				} else {
+					return Integer.valueOf(value.toString());
+				}
 			} else {
 				return 0;
 			}
@@ -29,18 +76,11 @@ public class SessParam {
 		}
 	}
 
+	public static Integer getInt(HttpServletRequest request, String key) {
+		return new SessParam(request).getInt(key);
+	}
+
 	public static String getStr(HttpServletRequest request, String key) {
-		String value = request.getParameter(key);
-		if (value == null) {
-			if (useSessionParam(request)) {
-				HttpSession session = request.getSession();
-				value = (String) session.getAttribute(key);
-				return value == null ? "" : value;
-			} else {
-				return "";
-			}
-		} else {
-			return value;
-		}
+		return new SessParam(request).getStr(key);
 	}
 }
