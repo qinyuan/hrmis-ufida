@@ -1,14 +1,14 @@
-div#searchBoxDiv{
+div#searchBoxDiv {
 	position: absolute;
 	margin-bottom: 10px;
 	width: 250px;
 	left: 750px;
 }
 
-div#searchBoxDiv span.label{
-	vertical-align: 35%;	
+div#searchBoxDiv span.label {
+	vertical-align: 35%;
 }
 
-div#filterDiv input{
-	width: 80px;
+div#filterDiv input {
+	width: 5.5em;
 }
