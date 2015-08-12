@@ -11,4 +11,9 @@ public class SimpleUserDaoTest {
 		assertTrue(SimpleUserDao.getInstances().length>0);
 	}
 
+    @Test
+    public void testAdd() {
+        SimpleUserDao.add("李四", "test");
+    }
+
 }
