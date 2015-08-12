@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <portable-config>
+    <!-- data_source.properties is deleted -->
+    <!--
     <config-file path="WEB-INF/classes/data_source.properties">
         <replace key="user">hrmis</replace>
         <replace key="password">123456</replace>
-        <replace key="url">jdbc:mysql://10.10.66.101:3306/hrmis</replace>
+        <replace key="url">jdbc:mysql://10.10.66.101:3306/hrmis?useUnicode=true&amp;characterEncoding=UTF8</replace>
     </config-file>
+    -->
     <config-file path="WEB-INF/classes/hibernate.cfg.xml">
         <replace xpath="//property[@name='connection.username']">hrmis</replace>
         <replace xpath="//property[@name='connection.password']">123456</replace>
-        <replace xpath="//property[@name='connection.url']">jdbc:mysql://10.10.66.101:3306/hrmis</replace>
+        <replace xpath="//property[@name='connection.url']">jdbc:mysql://10.10.66.101:3306/hrmis?useUnicode=true&amp;characterEncoding=UTF8</replace>
     </config-file>
 </portable-config>
