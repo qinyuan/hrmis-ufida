@@ -11,6 +11,6 @@
     <config-file path="WEB-INF/classes/hibernate.cfg.xml">
         <replace xpath="//property[@name='connection.username']">hrmis</replace>
         <replace xpath="//property[@name='connection.password']">123456</replace>
-        <replace xpath="//property[@name='connection.url']">jdbc:mysql://10.10.66.101:3306/hrmis?useUnicode=true&amp;characterEncoding=UTF8</replace>
+        <replace xpath="//property[@name='connection.url']">jdbc:mysql://10.10.66.101:3306/hrmis?useUnicode=true&amp;amp;characterEncoding=UTF8</replace>
     </config-file>
 </portable-config>
